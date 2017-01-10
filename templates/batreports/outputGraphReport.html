@@ -1,0 +1,499 @@
+{% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/default.css">
+
+{% endblock css%}
+
+
+{% block js %}
+
+<script type="text/javascript">
+
+ function submitUPINLink(obj){ 
+  
+      objId = obj.id;
+    
+      data = objId.split("-");
+    
+      if (data.length > 0){
+
+         upinId = data[1];
+    
+      } 
+    
+    $("#upinId").val(upinId);
+
+    $("#graphReportForm").submit();
+
+  }
+
+ function submitGraphForm(obj){ 
+  
+    $("#graphReportForm").attr('action','/batreports/createOutputGraphReport/');     
+
+    $("#graphReportForm").submit();
+
+  }
+  
+      {% for section, sectionSummaryObj in sectionSummaryObjMap.items %}    
+       {% for question, questionSummaryObj in sectionSummaryObj.questionSummaryObjMap.items %}
+
+	{% if questionSummaryObj.totalNumAdministrations != 0 %}
+          {% if barOrPieChart == "1" %}       
+	  $(function () {
+	   $('#sectionChart-{{section.id}}-{{question.id}}').highcharts({
+	       chart: {
+		   plotBackgroundColor: null,
+		   plotBorderWidth: null,
+		   plotShadow: false
+	       },
+	       title: {
+		   text: '{{question.text}}{% if questionSummaryObj.totalNumAdministrations == 0 %} No data to display.{% endif %}'
+	       },
+	       tooltip: {
+		   pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	       },
+	       plotOptions: {
+		   pie: {
+		       size : {% if questionAnswerSummaryObj.totalNumAdministrations != 0 %}250{% else %}5{% endif %},
+		       allowPointSelect: true,
+		       cursor: 'pointer',
+		       dataLabels: {
+			   enabled: true,
+			   format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+			   style: {
+			       color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+			   }
+		       }
+		   }
+	       },
+	       series: [{
+		   type: 'pie',
+		   name: 'Percentage respondents',
+		   data: [
+		   {% for questionAnswer, questionAnswerSummaryObj in questionSummaryObj.questionAnswerSummaryObjMap.items %}
+		      {% if questionAnswerSummaryObj.numAdministrations != 0 %}
+		      
+		       [{% if questionAnswerSummaryObj.questionAnswerIsfitb %} '{{questionAnswer}}'{% else %} '{{questionAnswer.text}}' {% endif %}, {{questionAnswerSummaryObj.numAdministrations}}],
+		       
+		       {% endif %}
+		    {% endfor %}   
+		   ]
+	       }]
+	   });
+       });
+	
+      {% else %}
+  
+	  $(function () { 
+	    $('#sectionChart-{{section.id}}-{{question.id}}').highcharts({
+	  chart: {
+	      type: 'bar'
+	  },
+	  title: {
+	      text: '{{question.text}}{%if questionSummaryObj.totalNumAdministrations == 0 %} No data to display.{% endif %}'
+	  },
+	  xAxis: {
+	      categories: [{% for questionAnswer, questionAnswerSummaryObj in questionSummaryObj.questionAnswerSummaryObjMap.items %}{% if questionAnswerSummaryObj.questionAnswerIsfitb %} '{{questionAnswer}}'{% else %} '{{questionAnswer.text}}' {% endif %},{% endfor %} ]
+	  },
+	  yAxis: {
+	      title: {
+		  text: 'Number of respondents'
+	      }
+	  },
+	  series: [
+	  {% for questionAnswer, questionAnswerSummaryObj in questionSummaryObj.questionAnswerSummaryObjMap.items %}
+	   {% if questionAnswerSummaryObj.numAdministrations != 0 %}
+	    {
+		name: {% if questionAnswerSummaryObj.questionAnswerIsfitb %} '{{questionAnswer}}'{% else %} '{{questionAnswer.text}}' {% endif %},
+		data: [{{questionAnswerSummaryObj.numAdministrations}}]
+	    }, 
+	    {% endif %}
+	  {% endfor %}	
+	  ]
+	  });
+	});
+         {% endif %}
+          <!-- if no responses -->
+        {% endif %}
+       {% endfor %}
+     {% endfor %} 
+ 
+
+    {% for section, sectionSummaryObj in demographicsSectionSummaryObjMap.items %}    
+    {% for question, questionSummaryObj in sectionSummaryObj.questionSummaryObjMap.items %}
+
+     {% if questionSummaryObj.totalNumAdministrations != 0 %}
+       {% if barOrPieChart == "1" %}       
+       $(function () {
+	$('#demographicsSectionChart-{{section.id}}-{{question.id}}').highcharts({
+	    chart: {
+		plotBackgroundColor: null,
+		plotBorderWidth: null,
+		plotShadow: false
+	    },
+	    title: {
+		text: '{{question.text}}{% if questionSummaryObj.totalNumAdministrations == 0 %} No data to display.{% endif %}'
+	    },
+	    tooltip: {
+		pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	    },
+	    plotOptions: {
+		pie: {
+		    size : {% if questionAnswerSummaryObj.totalNumAdministrations != 0 %}250{% else %}5{% endif %},
+		    allowPointSelect: true,
+		    cursor: 'pointer',
+		    dataLabels: {
+			enabled: true,
+			format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+			style: {
+			    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+			}
+		    }
+		}
+	    },
+	    series: [{
+		type: 'pie',
+		name: 'Percentage respondents',
+		data: [
+		{% for questionAnswerSummaryObj in questionSummaryObj.questionAnswerSummaryObjList %}
+		   {% if questionAnswerSummaryObj.numAdministrations != 0 %}
+		   
+		    [{% if questionAnswerSummaryObj.questionAnswerIsfitb %} '{{questionAnswer}}'{% else %} '{{questionAnswer.text}}' {% endif %}, {{questionAnswerSummaryObj.numAdministrations}}],
+		    
+		    {% endif %}
+		 {% endfor %}   
+		]
+	    }]
+	});
+    });
+     
+   {% else %}
+
+       $(function () { 
+	 $('#demographicsSectionChart-{{section.id}}-{{question.id}}').highcharts({
+       chart: {
+	   type: 'bar'
+       },
+       title: {
+	   text: '{{question.text}}{%if questionSummaryObj.totalNumAdministrations == 0 %} No data to display.{% endif %}'
+       },
+       xAxis: {
+	   categories: [{% for questionAnswerSummaryObj in questionSummaryObj.questionAnswerSummaryObjList %}{% if questionAnswerSummaryObj.questionAnswerIsfitb %} '{{questionAnswerSummaryObj.questionAnswer}}'{% else %} '{{questionAnswerSummaryObj.questionAnswer.text}}' {% endif %},{% endfor %} ]
+       },
+       yAxis: {
+	   title: {
+	       text: 'Number of respondents'
+	   }
+       },
+       series: [
+       {% for questionAnswerSummaryObj in questionSummaryObj.questionAnswerSummaryObjList %}
+	{% if questionAnswerSummaryObj.numAdministrations != 0 %}
+	 {
+	     name: {% if questionAnswerSummaryObj.questionAnswerIsfitb %} '{{questionAnswerSummaryObj.questionAnswer}}'{% else %} '{{questionAnswerSummaryObj.questionAnswer.text}}' {% endif %},
+	     data: [{{questionAnswerSummaryObj.numAdministrations}}]
+	 }, 
+	 {% endif %}
+       {% endfor %}	
+       ]
+       });
+     });
+      {% endif %}
+       <!-- if no responses -->
+     {% endif %}
+    {% endfor %}
+  {% endfor %}     
+ 
+</script>
+
+{% endblock js %}
+
+{% block content %}
+
+<!-- /.row -->
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Graph Report </h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<form method = "post" id = "graphReportForm" name = "graphReportForm" action="/batreports/scoreReport/" >
+   <input type="hidden" value="" name="upinId" id ="upinId"/> 
+{% for site in graphReportSelectionsObj.sites %}
+   <input type="hidden" value="{{site.id}}" name="siteId" id ="siteId"/> 
+{% endfor %}
+{% for study in graphReportSelectionsObj.studies %}
+   <input type="hidden" value="{{study.id}}" name="studyId" id ="studyId"/> 
+{% endfor %}
+{% for instrumentAdministrator in graphReportSelectionsObj.instrumentAdministrators %}
+   <input type="hidden" value="{{instrumentAdministrator.id}}" name="instrumentAdministratorId" id ="instrumentAdministratorId"/> 
+{% endfor %}
+{% for section in graphReportSelectionsObj.sections %}
+   <input type="hidden" value="{{section.id}}" name="sectionId" id ="sectionId"/> 
+{% endfor %} 
+   <input type="hidden" value="{{graphReportSelectionsObj.displayDemographicsData}}" name="displayDemographicsData" id ="displayDemographicsData"/> 
+ <div class="row">
+  <div class="col-lg-12">
+   <p>Below is the graph report for the section parameters. The data and graphs for each section can be viewed by toggling the panels below by clicking on the panel headers. The selection parameters are also shown below.</p>
+   <p>The graphs are interactive. If you mouse over the bar or pie charts, the responses and the number of responses will be displayed in a popup.You can also download the iamges or pdf version of the graphs by clicking on the widget on the top right of each graph, or download the entire data by clicking on the download button below.
+   </p>
+   <p>Graphs are shown only if there are administrations for the related question. To see the full set of questions for each section, and the administrations for the question, if any, please view the data panel for the section. </p>  
+  </div>
+</div>
+ <div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+	  <h4 class="panel-title">
+	    <a data-toggle="collapse" data-parent="#panels1" href="#selectionParametersPanel">
+	      Selection Parameter Details. (Please click to toggle this panel.)
+	    </a>
+	  </h4>        
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body" >
+	<div id="selectionParametersPanel" class="panel-collapse collapse" >
+	  <p class="text-center">
+	    <h4>Sites:</h4>
+	    <ul>
+	    {% for site in graphReportSelectionsObj.sites %}
+	       <li value="{{site.id}}">{{site}}</li> 
+	    {% endfor %}	    	    
+	    </ul>
+	  </p>
+	  <p class="text-center">
+	    <h4>Studies:</h4>
+	    <ul>
+	    {% for study in graphReportSelectionsObj.studies %}
+	       <li value="{{study.id}}">{{study}}</li> 
+	    {% endfor %}	    	    
+	    </ul>
+	  </p>	  
+	  <p class="text-center">
+	    <h4>Instrument Administrator:</h4>
+	    <ul>
+	    {% for instrumentAdministrator in graphReportSelectionsObj.instrumentAdministrators %}
+	       <li value="{{instrumentAdministrator.id}}">{{instrumentAdministrator}}</li> 
+	    {% endfor %}	    	    
+	    </ul>
+	  </p>
+	  <p class="text-center">
+	    <h4>Sections:</h4>
+	    <ul>
+	    {% for section in graphReportSelectionsObj.sections %}
+	       <li value="{{section.id}}">{{section}}</li> 
+	    {% endfor %}	    	    
+	    </ul>
+	  </p>
+	</div>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+  
+    <!-- Example row of columns -->   
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+	<h4 class="panel-title">
+	  <a data-toggle="collapse" data-parent="#panels1" href="#sectionsListPanel">
+	     List of sections </b>&nbsp;( Please click to toggle this panel. )
+	  </a>
+	</h4>
+      </div>
+      <div id="sectionsListPanel" class="panel-collapse collapse in">
+      <p>&nbsp;</p>
+      {% for section, sectionSummaryObj in sectionSummaryObjMap.items %}   
+      
+      <div class="panel-group" id="accordion1">
+        <div class="panel panel-warning">
+	    <div class="panel-heading">
+	         <h4 class="panel-title">
+	  	   <a data-toggle="collapse" data-parent="#accordion3" href="#sectionsPanel-{{section.id}}">
+	  	   {{ section }} </b>&nbsp;(  Please click to toggle this panel. )
+	  	   </a>
+	         </h4>
+	    </div>
+	    <div id="sectionsPanel-{{section.id}}" class="panel-collapse collapse in">
+	      <div class="panel-body">	      
+		  <div class="panel-group" id="accordion2">
+		    <div class="panel panel-success" style="overflow-x:auto;">
+			<div class="panel-heading">
+			    <h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion2" href="#sectionsDataPanel-{{section.id}}">
+				  Data &nbsp;(  Please click to toggle this panel. )
+				</a>
+			      </h4>
+			</div>
+			<div id="sectionsDataPanel-{{section.id}}" class="panel-collapse collapse">
+			    <div class="panel-body">
+			      <p>&nbsp;</p>
+			      <div class="table-responsive">
+			       <table class="table table-striped table-bordered table-hover" >
+				 <thead>
+				   <tr>
+				     <th width="60%">Question</th>
+				     <th width="30%">Answers</th>		      
+				     <th width="10%">UPIN</th>
+				   </tr>
+				 </thead>
+				 <tbody>
+				   {% for question, questionSummaryObj in sectionSummaryObj.questionSummaryObjMap.items %}
+				     <tr class="{% cycle 'odd gradeX' 'even gradeC' %}" >
+				       <td>{{question.text}}</td>
+				       <td>{% for questionAnswer, questionAnswerSummaryObj in questionSummaryObj.questionAnswerSummaryObjMap.items %}{% if questionAnswerSummaryObj.questionAnswerIsfitb %} '{{questionAnswer}}'{% else %} '{{questionAnswer.text}}' {% endif %}&nbsp;({{questionAnswerSummaryObj.numAdministrations}})<br/>{% endfor %}</td>
+				       <td>{% for questionAnswer, questionAnswerSummaryObj in questionSummaryObj.questionAnswerSummaryObjMap.items %}{% for administration in questionAnswerSummaryObj.administrationList %}<a id = "scoreReportLink-{{administration.upin.id}}" href="#" onclick ="javascript:submitUPINLink(this);">{{administration.upin.id}}</a>,{% endfor %}<br/>{% endfor %}</td>
+				     </tr>                
+				   {% endfor %}
+				 </tbody>
+			       </table>
+			    
+			     </div>
+			    </div>
+			</div>
+		    </div>
+		    <!-- end panel -->
+		    <div class="panel panel-info" style="overflow-x:auto;">
+			<div class="panel-heading">
+			    <h4 class="panel-title">
+			      <a data-toggle="collapse" data-parent="#accordion2" href="#sectionsGraphPanel-{{section.id}}">            
+				  Graph &nbsp;(  Please click to toggle this panel. )
+			      </a>
+			    </h4>
+			</div>
+			<div id="sectionsGraphPanel-{{section.id}}" class="panel-collapse collapse in">
+			  <div class="panel-body"> 
+			    {% for question, questionSummaryObj in sectionSummaryObj.questionSummaryObjMap.items %}
+			      {% if questionSummaryObj.totalNumAdministrations != 0 %}			       
+				<div id="sectionChart-{{section.id}}-{{question.id}}" style="width: 650px; height: 400px;"></div>
+			      {% endif %}
+			    {% endfor %}		  
+			  </div>
+			</div>
+		    </div>
+		  <!-- end panel -->			  
+		  </div>
+		  <!-- end panel group -->			  
+	      </div>
+	      <!-- end panel body -->			    
+	  </div>
+      </div>     
+   </div>      
+  {% endfor %}  	
+   </div>
+  </div>
+  
+    <!-- Demographics -->   
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+	<h4 class="panel-title">
+	  <a data-toggle="collapse" data-parent="#panels1" href="#demographicsSectionsListPanel">
+	     List of demographics sections </b>&nbsp;( Please click to toggle this panel. )
+	  </a>
+	</h4>
+      </div>
+      <div id="demographicsSectionsListPanel" class="panel-collapse collapse in">
+      <p>&nbsp;</p>
+      {% for section, sectionSummaryObj in demographicsSectionSummaryObjMap.items %}   
+      
+      <div class="panel-group" id="accordion1">
+        <div class="panel panel-warning">
+	    <div class="panel-heading">
+	         <h4 class="panel-title">
+	  	   <a data-toggle="collapse" data-parent="#accordion3" href="#demographicsSectionsPanel-{{section.id}}">
+	  	   {{ section }} </b>&nbsp;(  Please click to toggle this panel. )
+	  	   </a>
+	         </h4>
+	    </div>
+	    <div id="demographicsSectionsPanel-{{section.id}}" class="panel-collapse collapse in">
+	      <div class="panel-body">	      
+		  <div class="panel-group" id="accordion2">
+		    <div class="panel panel-success" style="overflow-x:auto;">
+			<div class="panel-heading">
+			    <h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion2" href="#demographicsSectionsDataPanel-{{section.id}}">
+				  Data &nbsp;(  Please click to toggle this panel. )
+				</a>
+			      </h4>
+			</div>
+			<div id="demographicsSectionsDataPanel-{{section.id}}" class="panel-collapse collapse">
+			    <div class="panel-body">
+			      <p>&nbsp;</p>
+			      <div class="table-responsive">
+			       <table class="table table-striped table-bordered table-hover" >
+				 <thead>
+				   <tr>
+				     <th width="60%">Question</th>
+				     <th width="30%">Answers</th>		      
+				     <th width="10%">UPIN</th>
+				   </tr>
+				 </thead>
+				 <tbody>
+				   {% for question, questionSummaryObj in sectionSummaryObj.questionSummaryObjMap.items %}
+				     <tr class="{% cycle 'odd gradeX' 'even gradeC' %}" >
+				       <td>{{question.text}}</td>
+				       <td>{% for  questionAnswerSummaryObj in questionSummaryObj.questionAnswerSummaryObjList %}{% if questionAnswerSummaryObj.questionAnswerIsfitb %} '{{questionAnswerSummaryObj.questionAnswer}}'{% else %} '{{questionAnswerSummaryObj.questionAnswer.text}}' {% endif %}&nbsp;({{questionAnswerSummaryObj.numAdministrations}})<br/>{% endfor %}</td>
+				       <td>{% for questionAnswerSummaryObj in questionSummaryObj.questionAnswerSummaryObjList %}{% for administration in questionAnswerSummaryObj.administrationList %}<a id = "scoreReportLink-{{administration.upin.id}}" href="#" onclick ="javascript:submitUPINLink(this);">{{administration.upin.id}}</a>,{% endfor %}<br/>{% endfor %}</td>
+				     </tr>                
+				   {% endfor %}
+				 </tbody>
+			       </table>
+			    
+			     </div>
+			    </div>
+			</div>
+		    </div>
+		    <!-- end panel -->
+		    <div class="panel panel-info" style="overflow-x:auto;">
+			<div class="panel-heading">
+			    <h4 class="panel-title">
+			      <a data-toggle="collapse" data-parent="#accordion2" href="#demographicsSectionsGraphPanel-{{section.id}}">            
+				  Graph &nbsp;(  Please click to toggle this panel. )
+			      </a>
+			    </h4>
+			</div>
+			<div id="demographicsSectionsGraphPanel-{{section.id}}" class="panel-collapse collapse in">
+			  <div class="panel-body"> 
+			    {% for question, questionSummaryObj in sectionSummaryObj.questionSummaryObjMap.items %}
+			      {% if questionSummaryObj.totalNumAdministrations != 0 %}			       
+				<div id="demographicsSectionChart-{{section.id}}-{{question.id}}" style="width: 650px; height: 400px;"></div>
+			      {% endif %}
+			    {% endfor %}		  
+			  </div>
+			</div>
+		    </div>
+		  <!-- end panel -->			  
+		  </div>
+		  <!-- end panel group -->			  
+	      </div>
+	      <!-- end panel body -->			    
+	  </div>
+      </div>     
+   </div>      
+  {% endfor %}  	
+   </div>
+  </div>
+  
+ </div>
+</div>
+  <p>
+     <div class="form-group">
+      <div class="checkbox">
+	<label>
+	  <input type="checkbox" value="1" name="printSelectionParameters" id="printSelectionParameters" ></input><b>Print selection parameters in download file.</b>
+	</label>
+      </div>
+      <p class="help-block">Default is not to print selection parameters.</p>
+    </div>  
+  </p>
+  <p class="text-center">
+
+   <button type="submit" class="btn btn-primary btn-lg" value = "0" name = "submitButton" id="submitButton" onclick ="javascript:submitGraphForm(this);">Cancel</button>&nbsp;&nbsp;&nbsp;
+   <button type="submit" class="btn btn-danger btn-lg" value = "1" name="submitButton" id="submitButton" onclick ="javascript:submitGraphForm(this);">Download CSV Data</button>
+
+ </p>
+
+ <!-- /.row -->
+</form>
+{% endblock content %}
+

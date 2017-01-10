@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/default.css">
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/nouislider.css"> -->
+<!-- div.demo { padding: 10px !important; }; -->
+{% endblock css%}
+{% block js %}
+
+<script type="text/javascript">
+
+  } );
+
+</script>
+
+{% endblock js %}
+
+{% block content %}
+
+<!-- /.row -->
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">UPINS</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<form method = "post" id = "individualReportForm" name = "individualReportForm" action="/batreports/scoreReport/">
+<input type="hidden" value="1" name="scoreReportScreen" id ="scoreReportScreen"/>
+ <div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        Enter UPIN
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body" >
+      {% if messages %}
+	<ul class="messages">
+        {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}><font color="red">{{ message }}</font></li>
+        {% endfor %}
+	</ul>
+      {% endif %}
+        <div class="table-responsive" >
+	  <p>Enter UPIN: <input type="text" name="upinId" id="upinId" />&nbsp;<button type="submit" class="btn btn-primary btn-lg" value = "0" id = "scoreReportButton" name = "scoreReportButton-{{upin.id}}" >Score Report</button></p>
+        </div>
+        <!-- /.table-responsive -->
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+  </div>
+  <!-- /.col-lg-12 -->
+ </div>
+ <!-- /.row -->
+</form>
+{% endblock content %}

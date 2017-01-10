@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/default.css">
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/nouislider.css"> -->
+<!-- div.demo { padding: 10px !important; }; -->
+{% endblock css%}
+{% block js %}
+
+<script type="text/javascript">
+
+  function submitUPINLink(obj,clickLocation){ 
+  
+    if ( clickLocation == 1 ) {
+     if ( $("#upinIDValue").val() != "" ){
+    
+      upinId = $("#upinIDValue").val();
+      
+      }
+      
+      else {
+         alert ( " Please enter a valid UPIN");      
+	 return;
+      }
+
+    } else if ( clickLocation == 2 ){
+  
+      objId = obj.id;
+    
+      data = objId.split("-");
+    
+      if (data.length > 0){
+
+         upinId = data[1];
+    
+      } 
+    
+    }
+    
+    $("#upinId").val(upinId);
+
+    $("#upinlistForm").submit();
+
+  }
+  
+  $(document).ready(function() {
+    $('#upinDataTable').DataTable();
+
+  } );
+
+</script>
+
+{% endblock js %}
+
+{% block content %}
+
+<!-- /.row -->
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">UPINS</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<form method = "post" id = "upinlistForm" name = "upinlistForm" action="/batreports/scoreReport/">
+ <input type="hidden" value="" name="upinId" id ="upinId"/>
+ <div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        Select an UPIN from the list of UPINS
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body" >
+      {% if messages %}
+	<ul class="messages">
+        {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}><font color="red">{{ message }}</font></li>
+        {% endfor %}
+	</ul>
+      {% endif %}
+        <div class="table-responsive" >
+	  <p>Enter UPIN: <input type="text" name="upinIDValue" id="upinIDValue" />&nbsp;<button type="button" class="btn btn-primary btn-lg" value = "0" id = "scoreReportButton" name = "scoreReportButton-{{upin.id}}" onclick ="javascript:submitUPINLink(this,1);">Score Report</button></p>
+	  <p>Or select from List below </p>
+	  <table id="upinDataTable" class="display" cellspacing="0" width="100%">	  	  
+	   <thead>
+	      <tr >
+		<th>UPIN id</a></th>
+		<th>Adminstration id</th>
+		<th>Site</th>
+		<th>Start</th>
+		<th>Stop</th>
+		<th>Instrument</th>
+                <th>Score Report</th>
+              </tr>
+           </thead>
+           <tbody>
+           {% for upinObj in upinObjList %}
+             <tr>
+               <td> <a id = "scoreReportLink-{{upinObj.upin.id}}" href="#" onclick ="javascript:submitUPINLink(this,2);"> {{ upinObj.upin.id }} </a> </td>
+	       <td>{{ upinObj.administration.id}}</td>
+	       <td>{{ upinObj.administration.site}}</td>
+	       <td>{{ upinObj.administration.start}}</td>
+	       <td>{{ upinObj.administration.stop}}</td>
+	       <td>{{ upinObj.administration.instrument}}</td>
+               <td><button type="button" class="btn btn-primary" id = "upinButton-{{upinObj.upin.id}}" name = "upinButton-{{upinObj.upin.id}}" onclick ="javascript:submitUPINLink(this,2);">Score Report</button></td>
+             </tr>
+           {% endfor %}
+           </tbody>
+          </table>
+        </div>
+        <!-- /.table-responsive -->
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+  </div>
+  <!-- /.col-lg-12 -->
+ </div>
+ <!-- /.row -->
+</form>
+{% endblock content %}

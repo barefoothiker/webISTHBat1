@@ -1,0 +1,40 @@
+<head>
+    <script src="/static/js/googlejsapi.js"></script>
+    <script>
+    var data = google.visualization.arrayToDataTable([
+         ['Questions', 'Num Respondents'],
+	 
+	          ['Consultation Only', 3],
+	 
+	          ['Treatment  with plasma', 0],
+	 
+	          ['Blood (RBC) transfusion', 1],
+	 
+	          ['None', 0],
+	 
+	          ['Surgical hemostasis', 1],
+	 
+	          ['Treatment with platelets', 0],
+	 
+	          ['Treatment with factor concentrates', 1],
+	 
+	          ['Treatment with desmopressin', 1],
+	 
+      ]);
+      
+      var view = new google.visualization.DataView(data);
+
+      var options = {
+        title: "Bar Chart",
+        width: 400,
+        height: 300,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var sectionChartVar = new google.visualization.BarChart(document.getElementById("sectionChart-3-21"));
+      sectionChartVar.draw(view, options);
+      </script>
+</head>
+<body>
+<div id = "sectionChart-3-21"/>
+</body>

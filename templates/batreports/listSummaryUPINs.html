@@ -1,0 +1,216 @@
+{% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/default.css">
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/nouislider.css"> -->
+<!-- div.demo { padding: 10px !important; }; -->
+{% endblock css%}
+{% block js %}
+
+<script type="text/javascript">
+
+  function submitUPINLink(obj,clickLocation){ 
+  
+    if ( clickLocation == 1 ) {
+     if ( $("#upinIDValue").val() != "" ){
+    
+      upinId = $("#upinIDValue").val();
+      
+      }
+      
+      else {
+         alert ( " Please enter a valid UPIN");      
+	 return;
+      }
+
+    } else if ( clickLocation == 2 ){
+  
+      objId = obj.id;
+    
+      data = objId.split("-");
+    
+      if (data.length > 0){
+
+         upinId = data[1];
+    
+      } 
+    
+    }
+    
+    $("#upinId").val(upinId);
+    
+    $("#upinlistForm").attr('action',"/batreports/scoreReport/");    
+    
+    $("#upinlistForm").submit();
+
+  }
+  
+  $(document).ready(function() {
+    $('#upinDataTable').DataTable();
+
+  } );
+
+</script>
+
+{% endblock js %}
+
+{% block content %}
+
+<!-- /.row -->
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">UPINS for summary report</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<form method = "post" id = "upinlistForm" name = "upinlistForm" action="/batreports/submitListUPINSummary/">
+  <input type="hidden" value="" name="upinId" id ="upinId"/>
+  <input type="hidden" value="{{userSummarySelectionObj.selectedStudy.id}}" name="selectedStudyId" id ="selectedStudyId"/> 
+  <input type="hidden" value="{{userSummarySelectionObj.selectedSite.id}}" name="selectedSiteId" id ="selectedSiteId"/> 
+    <input type="hidden" value="{{userSummarySelectionObj.instrumentAdministrator.id}}" name="selectedInstrumentAdministratorId" id ="selectedInstrumentAdministratorId"/> 
+  <input type="hidden" value="{{siteOrStudySelectionFlag}}" name="siteOrStudySelectionFlag" id ="siteOrStudySelectionFlag"/> 
+  <input type="hidden" value="{{userSummarySelectionObj.startDate}}" name="startDate" id ="startDate"/> 
+  <input type="hidden" value="{{userSummarySelectionObj.endDate}}" name="endDate" id ="endDate"/> 
+  {% for site in userSummarySelectionObj.sites %}
+     <input type="hidden" value="{{site.id}}" name="siteId" id ="siteId"/> 
+  {% endfor %}
+  {% for study in userSummarySelectionObj.studies %}
+     <input type="hidden" value="{{study.id}}" name="studyId" id ="studyId"/> 
+  {% endfor %}
+  {% for instrumentAdministrator in userSummarySelectionObj.instrumentAdministrators %}
+     <input type="hidden" value="{{instrumentAdministrator.id}}" name="instrumentAdministratorId" id ="instrumentAdministratorId"/> 
+  {% endfor %} 
+ 
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+	  <h4 class="panel-title">
+	    <a data-toggle="collapse" data-parent="#panels1" href="#selectionParametersPanel">
+	      Selection Parameter Details. (Please click to toggle this panel.)
+	    </a>
+	  </h4>        
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body" >
+	<div id="selectionParametersPanel" class="panel-collapse collapse" >
+
+	  <p class="text-center">
+	    <h4>Start Date:</h4>{{userSummarySelectionObj.startDate}}
+	    <br/>
+	    <h4>End Date:</h4>{{userSummarySelectionObj.endDate}}	 
+	  </p>
+
+	  <p class="text-center">
+	    <h4>Sites:</h4>
+	    <ul>
+             {% if siteOrStudySelectionFlag == "1" %}  	    
+	      <li value="{{userSummarySelectionObj.selectedSite.id}}">{{userSummarySelectionObj.selectedSite}}</li>
+	     {% else %}
+	      {% for site in userSummarySelectionObj.sites %}
+		<li value="{{site.id}}">{{site}}</li> 
+	      {% endfor %}
+	    {% endif %}  
+	    </ul>
+	  </p>
+	  <p class="text-center">
+	    <h4>Studies:</h4>
+	    <ul>
+             {% if siteOrStudySelectionFlag == "2" %}  	  
+
+	      <li value="{{userSummarySelectionObj.selectedStudy.id}}">{{userSummarySelectionObj.selectedStudy}}</li>
+	     {% else %}
+
+	      {% for study in userSummarySelectionObj.studies %}
+		<li value="{{study.id}}">{{study}}</li> 
+	      {% endfor %}
+	    {% endif %}  
+	    </ul>
+	  </p>	  
+	  <p class="text-center">
+	    <h4>Instrument Administrator:</h4>
+	    <ul>
+
+	       <li value="{{instrumentAdministrator.id}}">{{userSummarySelectionObj.instrumentAdministrator}}</li> 
+	    	    
+	    </ul>
+	  </p>
+	</div>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel --> 
+  </div>
+ </div>
+ <div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        Select an UPIN from the list of UPINS
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body" >
+      {% if messages %}
+	<ul class="messages">
+        {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}><font color="red">{{ message }}</font></li>
+        {% endfor %}
+	</ul>
+      {% endif %}
+        <div class="table-responsive" >
+	  <p>Enter UPIN: <input type="text" name="upinIDValue" id="upinIDValue" />&nbsp;<button type="button" class="btn btn-primary btn-lg" value = "0" id = "scoreReportButton" name = "scoreReportButton-{{upin.id}}" onclick ="javascript:submitUPINLink(this,1);">Score Report</button></p>
+	  <p>Or select from List below </p>
+	  <table id="upinDataTable" class="display" cellspacing="0" width="100%">	  	  
+	   <thead>
+	      <tr >
+		<th>UPIN id</a></th>
+		<th>Adminstration id</th>
+		<th>Site</th>
+		<th>Start</th>
+		<th>Stop</th>
+		<th>Instrument</th>
+                <th>Score Report</th>
+              </tr>
+           </thead>
+           <tbody>
+           {% for upinObj in upinObjList %}
+             <tr>
+               <td> {{ upinObj.upin.id }}  </td>
+	       <td>{{ upinObj.administration.id}}</td>
+	       <td>{{ upinObj.administration.site}}</td>
+	       <td>{{ upinObj.administration.start}}</td>
+	       <td>{{ upinObj.administration.stop}}</td>
+	       <td>{{ upinObj.administration.instrument}}</td>
+               <td><button type="button" class="btn btn-primary" id = "upinButton-{{upinObj.upin.id}}" name = "upinButton-{{upinObj.upin.id}}" onclick ="javascript:submitUPINLink(this,2);">Score Report</button></td>
+             </tr>
+           {% endfor %}
+           </tbody>
+          </table>
+        </div>
+        <!-- /.table-responsive -->
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+      <p>
+     <div class="form-group">
+      <div class="checkbox">
+	<label>
+	  <input type="checkbox" value="1" name="printSelectionParameters" id="printSelectionParameters" ></input><b>Print selection parameters in download file.</b>
+	</label>
+      </div>
+      <p class="help-block">Default is not to print selection parameters.</p>
+    </div>  
+  </p>
+  </div>
+  <!-- /.col-lg-12 -->
+
+  <p class="text-center">
+    <button type="submit" class="btn btn-primary btn-lg" value = "0" id = "submitListUpinSummaryButton" name = "submitListUpinSummaryButton" >Back to Summary Report</button>
+    <button type="submit" class="btn btn-danger btn-lg" value = "1" id = "submitListUpinSummaryButton" name = "submitListUpinSummaryButton">Download List</button>
+  </p>
+
+ </div>
+ <!-- /.row -->
+</form>
+{% endblock content %}

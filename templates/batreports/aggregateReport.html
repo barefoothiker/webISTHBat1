@@ -1,0 +1,278 @@
+{% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/default.css">
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/nouislider.css"> -->
+<!-- div.demo { padding: 10px !important; }; -->
+{% endblock css%}
+{% block js %}
+
+<script type="text/javascript">
+
+  function submitReportForm(obj,action){ 
+  
+    upinId = 0
+  
+    if ( action == "/batreports/scoreReport/" ) {
+  
+      objId = obj.id;
+    
+      data = objId.split("-");
+    
+      if (data.length > 0){
+
+         upinId = data[1];
+    
+      } 
+    
+    $("#upinId").val(upinId);
+    $("#reportForm").attr('action',action);    
+
+    $("#reportForm").submit();
+
+    }
+
+  }
+  
+  $(document).ready(function() {
+    
+    $('#upinDataTable').DataTable({
+      paging: false    
+    });
+    $('#sectionListTable').DataTable({
+       paging: false 
+      }
+      );
+    $('#questionListTable').DataTable({
+       paging: false 
+      }
+    );      
+    
+    $('#selectAllUPINs').click ( function()    
+     {        
+       $("input[name='reportUpinId']").prop('checked', $(this).is(':checked'));
+     }
+    );
+
+    $('#selectAllSections').click ( function()    
+     {        
+       $("input[name='instrumentSectionId']").prop('checked', $(this).is(':checked'));
+     }
+    );
+    
+    $('#selectAllMultipleChoices').click ( function()    
+     {        
+       $("input[name='multipleChoiceId']").prop('checked', $(this).is(':checked'));
+     }
+    );    		    
+
+  } );
+
+</script>
+
+{% endblock js %}
+
+{% block content %}
+
+<!-- /.row -->
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Aggregate Report</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<form method = "post" id = "reportForm" name = "reportForm" action="/batreports/downloadReport/" >
+ <input type="hidden" value="" name="upinId" id ="upinId"/>
+ <input type="hidden" value="{{selectionObj.site.id}}" name="siteId" id ="siteId"/>
+ <input type="hidden" value="{{selectionObj.instrumentAdministrator.id}}" name="instrumentAdministratorId" id ="instrumentAdministratorId"/>
+ <input type="hidden" value="{{selectionObj.study.id}}" name="studyId" id ="studyId"/>
+ <input type="hidden" value="{{selectionObj.instrument.id}}" name="instrumentId" id ="instrumentId"/>
+ <input type="hidden" value="{{selectionObj.diagnosis.id}}" name="diagnosisId" id ="diagnosisId"/>
+ <input type="hidden" value="{{selectionObj.encodingFormat}}" name="encodingFormat" id ="encodingFormat"/>
+ <div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+	  <h4 class="panel-title">
+	    <a data-toggle="collapse" data-parent="#panels1" href="#selectionParametersPanel">
+	      Selection Parameter Details. (Click to toggle this panel.)
+	    </a>
+	  </h4>        
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body" >
+	<div id="selectionParametersPanel" class="panel-collapse collapse" >
+	  <p class="text-center">
+	    <h4>Site:&nbsp;{{ selectionObj.site }}</h4>
+	  </p>
+	  <p>
+	    <h4>User:&nbsp;{{ selectionObj.instrumentAdministrator }}</h4>
+	  </p>
+	  <p>
+	    <h4>Instrument:&nbsp;{{ selectionObj.instrument }}</h4>
+	  </p>
+	  <p>
+	    <h4>Study:&nbsp;{{ selectionObj.study }}</h4>
+	  </p>
+	  <p>	    
+	    <h4>Diagnosis:&nbsp;{{ selectionObj.diagnosis }}</h4>
+	  </p>
+	  <p>	    
+	    <h4>Encoding Format:&nbsp;{{ selectionObj.encodingFormat }}</h4>
+	  </p>
+	</div>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+      	  <h4 class="panel-title">
+	    <a data-toggle="collapse" data-parent="#panels1" href="#reportListPanel">
+	      Aggregate Report Details. (Click to toggle this panel.)
+	    </a>
+	  </h4>        
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body" style="height:500px;overflow-y:auto;">
+	<div id="reportListPanel" class="panel-collapse collapse in" >
+	<p>Please select the UPIN's which need to show on the report. For detailed reporting parameters, please select in the panel below and click on "Download Report".</p>
+	<p> Please scroll to see all records in this panel. You can sort each column by clicking on the column headings.</p>
+	  <div class="table-responsive" >
+	    <table id="upinDataTable" class="display" cellspacing="0" width="100%" >	  	  
+	     <thead>
+	        <tr >
+	          <th>Select<input type="checkbox" value="" name="selectAllUPINs" id="selectAllUPINs" checked="checked"> </th>
+	    	  <th>UPIN id</a></th>
+	  	  <th>Adminstration id</th>
+		  <th>Site</th>
+		  <th>Start</th>
+		  <th>Stop</th>
+		  <th>Instrument</th>
+		  <th>Score</th>
+		  <th>Score Details</th>
+		</tr>
+	    </thead>
+	    <tbody>
+	    {% for upinObj in upinObjList %}
+             <tr>
+	        <td>
+		 <input type="checkbox" id="reportUpinId-{{upinObj.upin.id}}" name="reportUpinId" value={{upinObj.upin.id}} checked="checked">
+	        </td>
+	        <td> <a id = "scoreReportLink-{{upinObj.upin.id}}" href="#" onclick ="javascript:submitReportForm(this,'/batreports/scoreReport/');"> {{ upinObj.upin.id }} </a> </td>
+	        <td>{{ upinObj.administration.id}}</td>
+	        <td>{{ upinObj.administration.site}}</td>
+	        <td>{{ upinObj.administration.start}}</td>
+	        <td>{{ upinObj.administration.stop}}</td>
+	        <td>{{ upinObj.administration.instrument}}</td>
+	        <td>{{ upinObj.score}}</td>
+                <td><button type="button" class="btn btn-primary" id = "upinButton-{{upinObj.upin.id}}" name = "upinButton-{{upinObj.upin.id}}" onclick ="javascript:submitReportForm(this,'/batreports/scoreReport/');">Score Details</button></td>
+              </tr>
+	    {% endfor %}
+	    </tbody>
+	    </table>
+	  </div>
+	  <!-- /.table-responsive -->
+	</div>
+      </div>
+      <!-- /.panel-body -->
+    </div> 
+    <!-- /.panel -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+	<h4 class="panel-title">
+	  <a data-toggle="collapse" data-parent="#panels1" href="#sectionListPanel">
+	    Aggregate Report Download. Enter parameters and click button below to download a CSV report. (Click to toggle this panel.)
+	  </a>
+	</h4>        
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body" >
+	<div id="sectionListPanel" class="panel-collapse collapse in">
+	  <p>Please list sections to be included in the report.</p> 	    
+	  <p>Please scroll to see all records in this panel. You can sort each column by clicking on the column headings.</p>	    
+	  <div class="table-responsive" >
+	    <table id="sectionListTable" class="display" cellspacing="0" width="100%">	  	  
+	      <thead>
+		<tr>
+		  <th>Select<input type="checkbox" value="" name="selectAllSections" id="selectAllSections" checked="checked"></th>
+		  <th>Section</th>    
+		</tr>
+	      </thead>
+	      <tbody>
+	      {% for instrumentSection in instrumentSections %}
+	      <tr>
+		<td>
+		  <input type="checkbox" id="instrumentSectionId-{{instrumentSection.id}}" name="instrumentSectionId" checked="checked" value="{{instrumentSection.id}}">
+		</td>
+		<td>{{ instrumentSection}}</td>    
+	      </tr> 
+	      {% endfor %}
+	      </tbody>
+	    </table>
+	  </div>
+	  <br/>
+	  <p>Please select the questions for which you would like to see the multiple choice responses. The report defaults to a select list, which can be changed by selecting from the list below. Some of the questions do not have multiple 
+	  choices, so the selection would not be relevant. </p>
+	  <p>Please scroll to see all records in this panel. You can sort each column by clicking on the column headings.</p>
+	  <br/>
+	  <div class="table-responsive" style="height:300px;overflow-y:auto;">
+	    <table id="questionListTable" class="display" cellspacing="0" width="100%">	  	  
+	      <thead>
+		<tr>
+		  <th>Select<input type="checkbox" value="" name="selectAllMultipleChoices" id="selectAllMultipleChoices" checked="checked"></th>
+		  <th>Question</th>
+		</tr>
+	      </thead>
+	      <tbody>
+	      {% for questionViewObj in questionViewObjList %}
+	      <tr>
+		<td>
+		  <input type="checkbox" id="multipleChoiceId-{{questionViewObj.question.id}}" name="multipleChoiceId" {% if questionViewObj.isSelected %} checked="checked" {% endif %}value="{{questionViewObj.question.id}}">
+		</td>		    
+		<td>
+		  {{questionViewObj.question.text}}
+		</td>		    
+	      </tr> 
+	      {% endfor %}
+	      </tbody>
+	    </table>
+	  </div>
+	    
+	  <!--<p class="text-center">-->
+	    <!--<div class="checkbox">-->
+	      <!--<label>-->
+		<!--<input type="checkbox" value="1" name="downloadAsPDF" id="downloadAsPDF" ><b>Download as PDF</b></input>-->
+	      <!--</label>-->
+	    <!--</div>-->
+	  <!--</p>-->
+	  <!--<p class="help-block">Please indicate if the file is to be downloaded as a PDF. Default is CSV.</p>	  -->
+	<!--</div>-->
+	<!-- /.panel-body -->
+      </div>
+      <!-- /.panel --> 
+    </div>
+  <!-- /.col-lg-12 -->
+
+  </div>
+
+  <p class="text-center">
+    <div class="checkbox">
+      <label>
+	<input type="checkbox" value="1" name="printSelectionParameters" id="printSelectionParameters" ><b>Print Selection Parameters</b></input>
+      </label>
+    </div>
+  </p>
+  <p class="help-block">Please indicate if selection parameters are to be printed at the header of the report.</p>
+ 
+ </div>
+
+  <p class="text-center">
+   <button type="submit" class="btn btn-primary btn-lg" value = "1" name = "downloadOrPreview" id="previewReportButton" onsubmit="return submitReportForm(this, '/batreports/downloadReport/');">Preview Aggregate report</button>
+   <button type="submit" class="btn btn-danger btn-lg" value = "0" name = "downloadOrPreview" id="downloadReportButton" onsubmit="return submitReportForm(this, '/batreports/downloadReport/');">Download Aggregate report</button>&nbsp;&nbsp;&nbsp;
+ </p>
+
+ <!-- /.row -->
+</form>
+{% endblock content %}

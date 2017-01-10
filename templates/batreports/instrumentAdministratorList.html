@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/default.css">
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/nouislider.css"> -->
+<!-- div.demo { padding: 10px !important; }; -->
+{% endblock css%}
+{% block js %}
+
+<script type="text/javascript">
+
+  function submitAddInstrumentAdministrator(obj){ 
+  
+      $("#instrumentAdministratorlistForm").attr('action','/batreports/addInstrumentAdministrator/');     
+
+      $("#instrumentAdministratorlistForm").submit();
+
+  } 
+
+
+  function submitReportForm(obj){ 
+  
+    $("#reportForm").attr('action',action);    
+
+    $("#reportForm").submit();
+
+  }
+  
+  function submitInstrumentAdministratorLink(obj){ 
+  
+      objId = obj.id;
+    
+      data = objId.split("-");    
+
+      instrumentAdministratorId = data[1];
+    
+      $("#instrumentAdministratorId").val(instrumentAdministratorId);
+
+      $("#instrumentAdministratorlistForm").attr('action','/batreports/editInstrumentAdministrator/');          
+
+      $("#instrumentAdministratorlistForm").submit();
+
+  }
+  
+  function submitInstrumentAdministratorDetailLink(obj){ 
+  
+      objId = obj.id;
+    
+      data = objId.split("-");    
+
+      instrumentAdministratorId = data[1];
+    
+      $("#instrumentAdministratorId").val(instrumentAdministratorId);
+      
+      $("#instrumentAdministratorlistForm").attr('action','/batreports/displayInstrumentAdministratorDetailList/');     
+
+      $("#instrumentAdministratorlistForm").submit();
+
+  }  
+  
+  $(document).ready(function() {
+    $('#instrumentAdministratorDataTable').DataTable();
+
+  } );
+
+</script>
+
+{% endblock js %}
+
+{% block content %}
+
+<!-- /.row -->
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Instrument Administrators</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<form method = "post" id = "instrumentAdministratorlistForm" name = "instrumentAdministratorlistForm" action="/batreports/editInstrumentAdministrator/">
+ <input type="hidden" value="" name="instrumentAdministratorId" id ="instrumentAdministratorId"/>
+ <div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Select an user from the list of users
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body" >
+      {% if messages %}
+	<ul class="messages">
+        {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}><font color="red">{{ message }}</font></li>
+        {% endfor %}
+	</ul>
+      {% endif %}
+        <div class="table-responsive" >
+	  <table id="instrumentAdministratorDataTable" class="display" cellspacing="0" width="100%">	  	  
+	   <thead>
+	      <tr >
+		<th>Name</th>		
+		<th>User id</th>		
+		<th>Role</th>
+		<th>Waiver Status</th>
+		<th>Waiver Signed Date</th>
+		<th>Allowed Sites</th>
+		<th>Allowed Studies</th>
+		<th>Num Administrations</th>
+              </tr>
+           </thead>
+           <tbody>
+           {% for instrumentAdministratorObj in instrumentAdministratorObjList %}
+	     {% if instrumentAdministratorObj.displayInList %}
+             <tr>
+	       <td><a id = "instrumentAdministratorLink-{{instrumentAdministratorObj.instrumentAdministrator.id}}" href="#" onclick ="javascript:submitInstrumentAdministratorLink(this);"> {{ instrumentAdministratorObj.instrumentAdministrator.name}} </a></td>
+               <td> {{ instrumentAdministratorObj.instrumentAdministrator.id }} </td>
+	       <td>{{ instrumentAdministratorObj.instrumentAdministrator.role}}</td>
+	       <td>{% if instrumentAdministratorObj.waiverStatus == 'Valid' %} <font color="green"> {% else %} <font color="red"> {% endif %}{{ instrumentAdministratorObj.waiverStatus}}</font></td>
+	       <td>{{ instrumentAdministratorObj.instrumentAdministrator.waiver_signed}}</td>
+	       <td>{% for site in instrumentAdministratorObj.instrumentAdministrator.allowed_sites.all %}
+		     {{ site }}<br/>
+		    {% endfor %}
+		</td>
+	       <td>{% for study in instrumentAdministratorObj.instrumentAdministrator.allowed_studies.all %}
+		     {{ study }}<br/>
+		    {% endfor %}
+		</td>
+	       <td><a id = "instrumentAdministratorLink-{{instrumentAdministratorObj.instrumentAdministrator.id}}" href="#" onclick ="javascript:submitInstrumentAdministratorDetailLink(this);">{{ instrumentAdministratorObj.numAdministrations}}</a></td>
+             </tr>
+	     {% endif %}
+           {% endfor %}
+           </tbody>
+          </table>
+        </div>
+        <!-- /.table-responsive -->
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+  </div>
+  <!-- /.col-lg-12 -->
+ </div>
+ <!-- /.row -->
+{% if user.get_username == "105" %} 
+<div class="row">
+  <div class="col-lg-12">
+    <p class="text-center">
+      <button type="submit" class="btn btn-danger btn-lg" value = "1" name = "submitButton" id = "submitButton" onclick ="javascript:submitAddInstrumentAdministrator(this);">Add User</button>     
+    </p>
+  </div>
+  <!-- /.col-lg-12 -->
+ </div>
+{% endif %}
+</form>
+{% endblock content %}

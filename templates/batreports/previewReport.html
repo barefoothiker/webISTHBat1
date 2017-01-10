@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/default.css">
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/nouislider.css"> -->
+<!-- div.demo { padding: 10px !important; }; -->
+{% endblock css%}
+{% block js %}
+
+<script type="text/javascript">
+
+</script>
+
+{% endblock js %}
+
+{% block content %}
+
+<!-- /.row -->
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Preview Report</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<form method = "post" id = "reportForm" name = "reportForm" action="/batreports/createOutputReport/" >
+ <input type="hidden" value="{{selectionObj.site.id}}" name="siteId" id ="siteId"/>
+ <input type="hidden" value="{{selectionObj.instrumentAdministrator.id}}" name="instrumentAdministratorId" id ="instrumentAdministratorId"/>
+ <input type="hidden" value="{{selectionObj.study.id}}" name="studyId" id ="studyId"/>
+ <input type="hidden" value="{{selectionObj.instrument.id}}" name="instrumentId" id ="instrumentId"/>
+ <input type="hidden" value="{{selectionObj.diagnosis.id}}" name="diagnosisId" id ="diagnosisId"/>
+ <input type="hidden" value="{{selectionObj.encodingFormat}}" name="encodingFormat" id ="encodingFormat"/>
+ <input type="hidden" value="{%if reportOptionsObj.printSelectionParameters %}0{% else %}1{% endif %}" name="printSelectionParameters" id ="printSelectionParameters"/>
+ {% for instrumentSectionId in reportOptionsObj.instrumentSectionIds %}
+      <input type="hidden" value="{{instrumentSectionId}}" name="instrumentSectionId" id ="instrumentSectionId"/>
+{% endfor %}
+{% for multipleChoiceId in reportOptionsObj.multipleChoiceIds %}      
+      <input type="hidden" value="{{multipleChoiceId}}" name="multipleChoiceId" id ="multipleChoiceId"/>	   
+{% endfor %}
+ <div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+      	  <h4 class="panel-title">
+	    <a data-toggle="collapse" data-parent="#panels1" href="#reportListPanel">
+	      Report Details. (Click to toggle this panel.)
+	    </a>
+	  </h4>        
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body" style="height:500px;overflow-y:auto;">
+      <div id="reportListPanel" class="panel-collapse collapse in" >
+	<p><h4>{{reportDate}}</h4></p>
+	
+	{% if reportOptionsObj.printSelectionParameters %}
+	
+  	  <p><h4>Requested By:&nbsp;{{user}}</h4></p>
+	  <p><h4>Site:&nbsp;{{selectionObj.site}}</h4></p>
+	  <p><h4>Study:&nbsp;{{selectionObj.study}}</h4></p>
+	  <p><h4>Instrument Administrator:&nbsp;{{selectionObj.instrumentAdministrator}}</h4></p>
+	  <p><h4>Instrument:&nbsp;{{selectionObj.instrument}}</h4></p>
+	  <p><h4>Diagnosis:&nbsp;{{selectionObj.diagnosis}}</h4></p>
+	  <p><h4>EncodingFormat:&nbsp;{{selectionObj.encodingFormat}}</h4></p>
+	
+	{% endif %}
+	
+        <div class="table-responsive" >
+	  <table id="upinDataTable" class="display" cellspacing="0" width="100%" border = "1">	  	  
+	   <thead>
+	      <tr >
+		<th ></th>
+		<th ></th>
+		<th ></th>
+		<th ></th>
+		{% for questionCounter in reportObj.questionCounters %}
+		<th>{{questionCounter}}</th>
+		{% endfor %}
+	      </tr>
+	      <tr >
+		<th ></th>
+		<th ></th>
+		<th ></th>
+		<th ></th>
+		{% for sectionCounter in reportObj.sectionCounters %}
+		<th>{{sectionCounter}}</th>
+		{% endfor %}
+	      </tr>
+	      <tr >
+		<th>UPIN id</a></th>
+		<th>SiteID</a></th>
+		<th>Admin</a></th>
+		<th>PriTime</a></th>		
+		{% for headerColumn in reportObj.headerColumns %}
+		<th>{{headerColumn}}</th>
+		{% endfor %}
+              </tr>
+	      <tr >
+		<th></a></th>
+		<th></a></th>
+		<th></a></th>
+		<th></a></th>		
+		{% for subHeaderColumn in reportObj.subHeaderColumns %}
+		<th>{{subHeaderColumn}}</th>
+		{% endfor %}
+	      </tr>	      
+           </thead>
+           <tbody>
+           {% for reportDetailObj in reportObj.reportDetailObjList %}
+	    <input type="hidden" value="{{reportDetailObj.upinId}}" name="reportUpinId" id ="reportUpinId"/>	   
+             <tr>	     
+	      {% for columnValue in reportDetailObj.columnValues %}
+	          <td style="text-align:center;">{{ columnValue}}</td>
+  	      {% endfor %}
+             </tr>	   
+	   {% endfor %}
+           </tbody>
+          </table>
+        </div>
+        <!-- /.table-responsive -->
+      </div>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+    <!-- /.col-lg-12 -->
+    <p class="text-center">
+      <button type="submit" class="btn btn-primary btn-lg" value = "1" name = "downloadOrCancel" id="downloadOrCancel">Cancel</button>
+      <button type="submit" class="btn btn-danger btn-lg" value = "0" name = "downloadOrCancel" id="downloadOrCancel" >Download</button>&nbsp;
+    </p> 
+ </div>
+ <!-- /.row -->
+
+</form>
+{% endblock content %}

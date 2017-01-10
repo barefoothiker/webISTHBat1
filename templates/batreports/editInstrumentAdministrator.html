@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/default.css">
+{% endblock css%}
+{% block js %}
+
+<script type="text/javascript">
+  
+ $(document).ready(function() {
+    
+    $('#sitesDataTable').DataTable({
+      paging: false   
+    });
+
+    $('#studiesDataTable').DataTable({
+       paging: false 
+      }
+    );  
+  
+    $('#selectAllStudies').click ( function()    
+     {        
+       $("input[name='studyId']").prop('checked', $(this).is(':checked'));
+     }
+    );
+    
+    $('#selectAllSites').click ( function()    
+     {        
+       $("input[name='siteId']").prop('checked', $(this).is(':checked'));
+     }
+    );    
+
+  });
+  
+  function processCancel(obj){
+  
+      $("#editInstrumentAdministratorForm").attr('action','/batreports/displayInstrumentAdministratorList/');          
+
+      $("#editInstrumentAdministratorForm").submit();
+  
+  }
+
+</script>
+
+{% endblock js %}
+
+{% block content %}
+
+<!-- /.row -->
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Edit User: {{instrumentAdministratorObj.instrumentAdministrator.name}} (Login id:&nbsp;{{instrumentAdministratorObj.instrumentAdministrator.id}})</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<form method = "post" id = "editInstrumentAdministratorlistForm" name = "editInstrumentAdministratorForm" action="/batreports/submitInstrumentAdministrator/">
+ <input type="hidden" name="instrumentAdministratorId" id ="instrumentAdministratorId" value = "{{instrumentAdministratorObj.instrumentAdministrator.id}}"/>
+<input type="hidden" id = "email" name = "email" value = ""/> 
+ <div class="row">  
+    <div class="col-lg-6"> 
+      <div class="form-group">
+	<div class="checkbox">
+	  <label>
+	    <input type="checkbox" value="1" name="signWaiverFlag" id="signWaiverFlag" {% if instrumentAdministratorObj.signWaiverFlag %} checked disabled {% endif %}</input><b>Sign Waiver.</b>
+	  </label>
+	</div>
+	<p class="help-block">Checked if waiver has already been signed and is valid. No action needed if waiver is already signed.</p>
+      </div>  
+
+      <div class="form-group">
+	<label>Waiver Sign Date:</label>&nbsp;{{instrumentAdministratorObj.instrumentAdministrator.waiver_signed}}
+	<p class="help-block">Date when waiver was signed. </p>
+      </div>  
+
+      <div class="form-group">
+	<label>Waiver Expiration Date:</label>&nbsp;{{instrumentAdministratorObj.waiverExpirationDate}}
+	<p class="help-block">Waiver is valid for 1 year from date of signing. </p>
+      </div>  
+
+      <div class="form-group">
+	<label>Waiver Status:</label>&nbsp;<b>{% if instrumentAdministratorObj.signWaiverFlag %} <font color="green"> {% else %} <font color="red"> {% endif %} {{instrumentAdministratorObj.waiverStatus}}</font></b>
+	<p class="help-block">Waiver needs to be re-signed every 1 year. For administering the ISTH-BAT phenotype instrument, the waiver must be valid.</p>
+      </div>       
+      <div class="form-group">
+	    <label>Password:</label>
+	  <input type="password" class="form-control" id = "password" name = "password" value = "{{instrumentAdministratorObj.instrumentAdministrator.password}}" required/>
+	  <p class="help-block">Password used for logging into the application.</p>
+      </div>      
+
+      {% if user.get_username == "105" %}      
+	<div class="form-group">
+	      <label>Password Value:</label>
+	    <input type="text" class="form-control" id = "passwordString" name = "passwordString" value = "{{instrumentAdministratorObj.instrumentAdministrator.password}}" disabled/>
+	    <p class="help-block">Password used for logging into the application.</p>
+	</div>
+      {% endif %}
+      <div class="form-group">
+	  <label>Select Role</label>
+	  <select class="form-control" name="roleId" id="siteId" required {% if user.get_username != "105" %} disabled {% endif %}>
+	    <option value = "">-- Select role --</option>
+	      {% for roleObj in instrumentAdministratorObj.roleObjList %}
+		<option value = "{{ roleObj.role.id }}" {% if roleObj.isSelected %} selected {% endif %}>{{roleObj.role}}</option>
+	     {% endfor %}
+	  </select>
+      </div>         
+    </div>
+  </div>
+
+ <div class="row">  
+  <!-- panel for sites -->  
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+      	  <h4 class="panel-title">
+	    <a data-toggle="collapse" data-parent="#panels1" href="#sitesListPanel">
+	      Select Authorized Sites. (Click to toggle this panel.)
+	    </a>
+	  </h4>  
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+       <div id="sitesListPanel" class="panel-collapse collapse in" >      
+        <div class="table-responsive"  style="height:400px;overflow-y:auto;" -webkit-scrollbar>
+	  <p>Please select sites from the following list</p>
+	  <table id="sitesDataTable" name="sitesDataTable" class="display" cellspacing="0" width="100%">	  
+	   <thead>
+	      <tr >
+		<th>Select<input type="checkbox" value="" name="selectAllSites" id="selectAllSites" {% if user.get_username != "105" %} disabled {% endif %}></th>
+                <th>Site</th>
+              </tr>
+           </thead>
+           <tbody>
+           {% for siteObj in instrumentAdministratorObj.siteObjList %}
+             <tr>
+               <td>
+		  <div class="checkbox">
+		    <label>
+		      <input type="checkbox" value="{{siteObj.site.id}}" name ="siteId" id ="siteId" {% if siteObj.isSelected %} checked {% endif %} {% if user.get_username != "105" %} disabled {% endif %}>
+		    </label>
+		  </div>
+		  </td>
+               <td>{{siteObj.site}}</td>
+             </tr>
+           {% endfor %}
+           </tbody>
+          </table>
+        </div>
+        <!-- /.table-responsive -->
+       </div>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+  </div>
+  <!-- /.col-lg-12 -->
+   
+  <!-- panel for studies -->  
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+	  <h4 class="panel-title">
+	    <a data-toggle="collapse" data-parent="#panels1" href="#studiesListPanel">
+	      Select Studies. (Click to toggle this panel.)
+	    </a>
+	  </h4>      
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body" style="height:400px;overflow-y:auto;"  -webkit-scrollbar>
+       <div id="studiesListPanel" class="panel-collapse collapse in" >          
+	<div class="table-responsive" >
+	  <p>Please select studies from the following list</p>
+	  <table id="studiesDataTable" name="studiesDataTable" class="display" cellspacing="0" width="100%">	  
+	   <thead>
+	      <tr >
+		<th>Select<input type="checkbox" value="" name="selectAllStudies" id="selectAllStudies" {% if user.get_username != "105" %} disabled {% endif %}></th>
+		<th>Study</th>
+	      </tr>
+	   </thead>
+	   <tbody>
+	   {% for studyObj in instrumentAdministratorObj.studyObjList %}
+	     <tr>
+	       <td>
+		  <div class="checkbox">
+		    <label>
+		      <input type="checkbox" value="{{studyObj.study.id}}" name ="studyId" id ="studyId" {% if studyObj.isSelected %} checked {% endif %} {% if user.get_username != "105" %} disabled {% endif %}>
+		    </label>
+		  </div>
+		  </td>
+	       <td>{{studyObj.study}}</td>
+	     </tr>
+	   {% endfor %}
+	   </tbody>
+	  </table>
+	</div>
+	<!-- /.table-responsive -->
+       </div> 	
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+  </div>
+  <!-- /.col-lg-12 -->
+  
+ </div>
+ <!-- /.row -->
+ <!-- /.row -->
+<div class="row">
+  <div class="col-lg-12">
+    <p class="text-center">
+      <button type="submit" class="btn btn-primary btn-lg" value = "0" name = "submitButton" id = "submitButton" onclick = "javascript:processCancel(this);">Cancel</button>&nbsp;&nbsp;&nbsp;
+      <button type="submit" class="btn btn-danger btn-lg" value = "1" name = "submitButton" id = "submitButton" >Update</button>     
+    </p>
+  </div>
+  <!-- /.col-lg-12 -->
+ </div>
+ <!-- /.row -->
+</form>
+{% endblock content %}

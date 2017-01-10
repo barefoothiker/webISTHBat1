@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/default.css">
+{% endblock css%}
+{% block js %}
+
+<script type="text/javascript">
+
+  function submitUPINLink(){ 
+
+  }
+  
+  $(document).ready(function() {
+    $('#upinDataTable').DataTable();
+
+  } );
+
+</script>
+
+{% endblock js %}
+
+{% block content %}
+
+<!-- /.row -->
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Aggregate Report Parameters</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<form method = "post" id = "aggregateReportForm" name = "aggregateReportForm" action="/batreports/aggregateReport/" onsubmit="return validateForm();" >
+ <div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+	Select parameters for the aggregate report.
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body" >
+      {% if messages %}
+	<ul class="messages">
+	{% for message in messages %}
+	  <li{% if message.tags %} class="{{ message.tags }}"{% endif %}><font color="red">{{ message }}</font></li>
+	{% endfor %}
+	</ul>
+      {% endif %}
+	<div class="table-responsive" >
+	  <p>Select parameters for the aggregate report. All fields are required.</p>
+	  <p>
+	    <label>Select Site</label>
+	    <select class="form-control" name="siteId" id="siteId" onchange="javascript:setLeadList(this);" >
+	      <option value = "">-- Select site --</option>
+		{% for site in allowedSites %}
+	      <option value = "{{ site.id }}">{{site}}</option>
+	       {% endfor %}
+	    </select>
+	  </p>
+	  <p>
+	    <label>Select User</label>
+	    <select class="form-control" name="instrumentAdministratorId" id="instrumentAdministratorId"  >
+	      <option value = "">-- Select user --</option>
+		{% for instrumentAdministrator in instrumentAdministratorList %}
+	      <option value = "{{ instrumentAdministrator.id }}">{{instrumentAdministrator.name}}</option>
+	       {% endfor %}
+	    </select>
+	  </p>
+	  <p>
+	    <label>Select Instrument</label>
+	    <select class="form-control" name="instrumentId" id="instrumentId" required>
+	      <option value = "">-- Select instrument --</option>
+		{% for instrument in instruments %}
+	      <option value = "{{ instrument.id }}">{{instrument}}</option>
+	       {% endfor %}
+	    </select>
+	  </p>
+	  <p>
+	    <label>Select Studies</label>
+	    <select class="form-control" name="studyId" id="studyId" onchange="javascript:setLeadList(this);" required>
+	      <option value = "">-- Select study --</option>
+		{% for study in studies %}
+	      <option value = "{{ study.id }}">{{study}}</option>
+	       {% endfor %}
+	    </select>
+	  </p>
+	  <p>
+	    <label>Select Diagnosis</label>
+	    <select class="form-control" name="diagnosisId" id="diagnosisId" onchange="javascript:setLeadList(this);" required>
+	      <option value = "">-- Select diagnosis --</option>
+		{% for diagnosis in diagnoses %}
+	      <option value = "{{ diagnosis.id }}">{{diagnosis}}</option>
+	       {% endfor %}
+	    </select>
+	  </p>
+	  <p>
+	    <label>Select Encoding Format</label>
+	    <select class="form-control" name="encodingFormatId" id="encodingFormatId" onchange="javascript:setLeadList(this);" required>
+	      <option value = "">-- Select encodingFormat --</option>
+		{% for encodingFormat in encodingFormats %}
+	      <option value = "{{ encodingFormat }}">{{encodingFormat}}</option>
+	       {% endfor %}
+	    </select>
+	  </p>
+	  <p class="text-center">
+	    <button type="submit" class="btn btn-danger btn-lg" value = "0" name = "batreportsHomeButton" id = "batreportsHomeButtonshowUPINList" >Fetch report information</button>&nbsp;&nbsp;&nbsp;
+	  </p>
+	</div>
+	<!-- /.table-responsive -->
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+  </div>
+  <!-- /.col-lg-12 -->
+ </div>
+ <!-- /.row -->
+</form>
+{% endblock content %}

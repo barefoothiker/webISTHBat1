@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block css %}
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/default.css"> -->
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/nouislider.css"> -->
+<!-- div.demo { padding: 10px !important; }; -->
+{% endblock css%}
+{% block js %}
+
+<script type="text/javascript">
+
+  function submitPatientHistoryLink(obj){ 
+  
+    objId = obj.id;
+    data = objId.split("-");
+
+    treatmentHistoryId = data[1];
+
+    $("#treatmentHistoryId").val(treatmentHistoryId);
+    $("#dashBoardForm").submit();
+
+   }
+
+   google.load("visualization", "1", {packages:["table"]});
+   google.setOnLoadCallback(drawTable);
+   columnNameArray = ["Comments","Physician Service","Hct","Hgb","Blood Product","Num Units","Indications (SearchString) ","Symptoms (SearchString )","Hemcis Suggestion","Transfusion Administered"];
+
+   barChartArray = ["Comments","Physician Service","Hct","Hgb","Blood Product","Num Units","Indications (SearchString) ","Symptoms (SearchString )","Transfusion Suggested","Transfusion Administered"];
+
+   function drawTable() {
+     var data = new google.visualization.DataTable();
+     for (i = 0; i<columnNameArray.length; i++ ){
+       data.addColumn('string', columnNameArray[i]);
+     }
+
+     data.addRows([
+      {% for transfusionObj in transfusionObjList %}
+          ["{{ transfusionObj.comments }}", "{{ transfusionObj.physicianService }}", "{{ transfusionObj.hct }}","{{ transfusionObj.hgb }}",
+            "{{ transfusionObj.bloodProduct }}","{{ transfusionObj.numUnits }}", {% for indicationObj in transfusionObj.indicationObjList %}"{{ indicationObj.indication.description }} ({{indicationObj.indicationSearchString }})"{% endfor %}, {% for symptomObj in transfusionObj.symptomObjList %}"{{ symptomObj.symptom.description }} ({{symptomObj.symptomSearchString }})"{% endfor %}, {% for decisionObj in transfusionObj.decisionObjList %}"{{decisionObj.decision}}.<br/><a id = 'patientHistoryLink-{{decisionObj.transfusionHistory.id}}' href='/hemcis/seeDecisionTree/{{decisionObj.transfusionHistory.id}}/' > See decision tree</a>."{% endfor %}, "{{ transfusionObj.transfusionAdministered }}" ],
+      {% endfor %}
+     ]);
+
+     var table = new google.visualization.Table(document.getElementById('table_div'));
+     table.draw(data, {showRowNumber: false, page:'enable',pageSize:'10', allowHtml:true});
+
+   }<!-- end draw table -->
+
+    google.load("visualization", "1", {packages:["orgchart"]});
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+ 
+      var data = new google.visualization.DataTable();
+
+      data.addColumn('string', 'Description');
+      data.addColumn('string', 'Id');
+
+      data.addRows([
+      {% for decisionTreeNode in decisionTreeNodes %}
+          [{v:'{{decisionTreeNode.nodeId}}', f:'{{decisionTreeNode.description}}<div style="color:red; font-style:italic">{{decisionTreeNode.description}}</div>'}, '{{decisionTreeNode.parentNodeId}}'],
+      {% endfor %}
+        ]);
+        var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+        chart.draw(data, {allowHtml:true});
+    }
+
+</script>
+
+{% endblock js %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Analysis Dashboard</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+{% csrf_token %}
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Analysis of transfusion data</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<form action="/hemcis/seeDecisionTree/"  enctype="multipart/form-data" method = "post" id = "dashBoardForm" >
+<input type="hidden" value = "" name="treatmentHistoryId" id ="treatmentHistoryId"/>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Results of data analysis
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <div class="panel-group" id="accordion">
+          <div class="panel panel-default" style="overflow: auto;">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#patientDataDiv"> Show / Hide Patient Data</a>
+              </h4>
+            </div>
+            <div id="patientDataDiv" class="panel-collapse collapse">
+	      <p><div id="table_div" ></div></p>
+            </div>
+          </div> 
+        </div>
+        <div class="panel-group" id="accordion">
+          <div class="panel panel-default" style="overflow: auto;">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#decisionTreeDiv"> Show / Hide Decision Tree</a>
+              </h4>
+            </div>
+            <div id="decisionTreeDiv" class="panel-collapse collapse">
+	      <p><div id="chart_div" ></div></p>
+            </div>
+          </div> 
+        </div>
+       <!-- <p><div id="chart_div"></div></p> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

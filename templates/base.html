@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+        <title>ISTH-BAT Phenotype Recording Instrument</title>
+        <!-- Bootstrap core CSS -->
+        <link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/jquery.dataTables.min.css" rel="stylesheet">	
+        <!-- Custom styles for this template -->
+        <link href="/static/css/justified-nav.css" rel="stylesheet">
+        <link href="/static/css/datepicker.css" rel="stylesheet">        
+        <!-- Bootstrap core JavaScript -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="/static/js/jquery.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/jquery.dataTables.min.js"></script>
+	<script src="/static/js/highcharts.js"></script>	
+        <script src="/static/js/modules/heatmap.js"></script>
+	<script src="/static/js/modules/exporting.js"></script>	
+	<!--<script src="/static/js/googlejsapi.js"></script>-->
+	<script src="/static/js/jqBootstrapValidation.js"></script>
+	<script src="/static/js/datepicker.js"></script>	
+	<!--<script src="/static/js/Chart.js"></script>-->
+	
+       {% block js %} 
+
+       {% endblock js %} 
+
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="masthead">
+                <div class="row">
+                    <div class="col-xs-12" style="text-align:center;">
+                        <a href="/batreports/"><img src="/static/img/rubhpsr_isth-batr_logo.jpg" width="600"/></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p style="text-align:center;font-weight:bold;font-size:24px;">ISTH-BATR Bleeding Questionnaire Reports<p/></a>
+                    </div>
+                </div>
+            </div>
+
+	    <nav class="navbar navbar-default">
+	      <div class="container-fluid">
+		<div class="navbar-header">
+		  <a class="navbar-brand" href="https://bh.rockefeller.edu/bat/login">ISTH-BATR Questionnaire</a>
+		</div>
+		<div>
+		  <ul class="nav navbar-nav">
+		    <li {% if selectedMenu == "Home" %}class="active"{% endif %}><a href="/batreports/">Report Home</a></li>
+		    <li {% if selectedMenu == "Single" %}class="active"{% endif %}><a href="/batreports/listUPINs">List UPINs</a></li>		    
+		    <li {% if selectedMenu == "Individual" %}class="active"{% endif %}><a href="/batreports/individualReport">Individual Report</a></li>
+		    <li {% if selectedMenu == "Aggregate" %}class="active"{% endif %}><a href="/batreports/selectParameters">Aggregate Report</a></li>
+		    <li {% if selectedMenu == "Graph" %}class="active"{% endif %}><a href="/batreports/graphReport">Graph Report</a></li>
+		    <li {% if selectedMenu == "UserManagement" %}class="active"{% endif %}><a href="/batreports/displayInstrumentAdministratorList">User Management</a></li>
+		    {% if not user.is_authenticated %} 
+		    <li >
+		         <a href="/batreports/loginLanding">
+    			Login
+		      </a>
+		    </li>		    
+		    {% endif %}
+		    {% if user.get_username == "105" %}		    
+		    <li {% if selectedMenu == "Summary" %}class="active"{% endif %}><a href="/batreports/summaryReport">Summary Report</a></li>
+		    <li {% if selectedMenu == "StudyList" %}class="active"{% endif %}><a href="/batreports/displayStudyList">Study List</a></li>
+		    <li {% if selectedMenu == "SiteList" %}class="active"{% endif %}><a href="/batreports/displaySiteList">Site List</a></li>		    
+		    {% endif %}
+		  </ul>
+		  {% if user.is_authenticated %} 
+		  <ul class="nav pull-right">
+		    <li >
+		         {{user.get_full_name}}
+		    </li>
+		    <li >
+		         <a href="/accounts/logout">
+    			Logout
+		      </a>
+		    </li>
+		  </ul>
+		  {% endif %}
+		</div>
+		
+	      </div>
+	    </nav>
+	    
+	    {% if selectedMenu == "Home" %}
+	    <p> 
+		<b>
+		    Please do not use the back button on the browser in this application. If the back button is used, then there might be unpredictable results. For navigation, please use the buttons at the bottom of the page, or select from the menu items.
+		</b>
+	    </p>
+	    {% endif %}
+	    
+	    {% if selectedMenu == "Summary" %}
+	    <p> 
+		<b>
+		    Please do not use the back button on the browser in this application. If the back button is used, then there might be unpredictable results. For navigation, please use the buttons at the bottom of the page, or select from the menu items.
+		</b>
+	    </p>
+	    {% endif %}
+	    
+	    {% block content %}
+	    
+	    {% endblock content %}
+            <!-- Site footer -->
+            <div class="footer">
+                <p>© The Rockefeller University 2015<img src="/static/img/ctsa_logo.gif" /></p>
+            </div>
+        </div>
+        <!-- /container -->
+    </body>
+</html>

@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+{% block css %}
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/default.css"> -->
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/nouislider.css"> -->
+<!-- div.demo { padding: 10px !important; }; -->
+{% endblock css%}
+{% block js %}
+
+<script type="text/javascript">
+
+    $(".tooltip-examples a").tooltip({
+        placement : 'top'
+    });
+   <!-- google.load("visualization", "1", {packages:["controls"]}); -->
+   <!-- google.setOnLoadCallback(drawDashboard); -->
+
+   google.load("visualization", "1", {packages:[ "table", "controls"]});
+   google.setOnLoadCallback(drawTable);
+
+   columnNameArray = ["Comments","Physician Service","Hct","Hgb","Blood Product","Num Units","Indications (SearchString) ","Symptoms (SearchString )","Hemcis Suggestion","Transfusion Administered"];
+
+   function drawTable() {
+
+      var data = google.visualization.arrayToDataTable([
+          ["Row Number","Comments","Physician Service","Hct","Hgb","Blood Product","Num Units","Indications (SearchString) ","Symptoms (SearchString )","Hemcis Suggestion","Transfusion Administered"],
+      {% for transfusionObj in transfusionObjList %}
+          ["{{ transfusionObj.datafileRowNumber }}","{{ transfusionObj.comments }}", "{{ transfusionObj.physicianService }}", "{{ transfusionObj.hct }}","{{ transfusionObj.hgb }}",
+            "{{ transfusionObj.bloodProduct }}","{{ transfusionObj.numUnits }}","{{ transfusionObj.indicationString }}", "{{ transfusionObj.symptomString }}", {% for decisionObj in transfusionObj.decisionObjList %}"{{decisionObj.decision}}.<br/><a id = 'patientHistoryLink-{{decisionObj.transfusionHistory.id}}' href='/hemcis/seeDecisionTree/{{decisionObj.transfusionHistory.id}}/'> See decision tree</a>."{% endfor %}, "{{ transfusionObj.transfusionAdministered }}" ],
+      {% endfor %}
+        ]);
+
+     var table = new google.visualization.Table(document.getElementById("table_div"));
+     table.draw(data, {showRowNumber: false, page:'enable',pageSize:'10', allowHtml:true});
+
+     <!-- var dashboard = new google.visualization.Dashboard(document.getElementById("dashboard_div")); -->
+
+     <!-- var transfusionCountSlider = new google.visualization.ControlWrapper({ -->
+     <!--      'controlType': 'NumberRangeFilter', -->
+     <!--      'containerId': 'filter_div', -->
+     <!--      'options': { -->
+     <!--        'filterColumnLabel': 'Transfusion Count' -->
+     <!--      } -->
+     <!-- }); -->
+
+     <!-- var pieChart = new google.visualization.ChartWrapper({ -->
+     <!--    'chartType': 'PieChart', -->
+     <!--    'containerId': 'pieChart_div', -->
+     <!--    'options': { -->
+     <!--        'width': 300, -->
+     <!--        'height': 300, -->
+     <!--        'pieSliceText': 'Transfusion Count', -->
+     <!--        'legend': 'right' -->
+     <!--      } -->
+     <!--    }); -->
+
+     <!-- var options = { -->
+     <!--    title: 'Summary by Physician Service', -->
+     <!--    pieHole: 0.4, -->
+     <!-- }; -->
+
+     <!-- dashboard.bind(transfusionCountSlider, pieChart); -->
+  
+     <!-- dashboard.draw(dashboardData, options); -->
+
+   }<!-- end draw table -->
+
+    google.load("visualization", "1", {packages:["orgchart"]});
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+ 
+      var data = new google.visualization.DataTable();
+
+      data.addColumn('string', 'Description');
+      data.addColumn('string', 'Id');
+
+      data.addRows([
+      {% for decisionTreeNode in decisionTreeNodes %}
+          [{v:'{{decisionTreeNode.nodeId}}', f:'<a href="#" data-toggle="tooltip" title="{{decisionTreeNode.description}}.{% if decisionTreeNode.decision %}The decision is to {{decisionTreeNode.decision}}.{% endif %}">{{decisionTreeNode.description}}</a>{% if decisionTreeNode.decision %}<div style="color:blue; font-weight:bold">{{decisionTreeNode.decision}}</div>{% endif %}'}, '{{decisionTreeNode.parentNodeId}}'],
+      {% endfor %}
+        ]);
+        var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+        chart.draw(data, {allowHtml:true});
+    }
+
+     google.load("visualization", "1", {packages:["corechart"]});
+     google.setOnLoadCallback(drawSummaryChart);
+
+     function drawSummaryChart() {
+
+       var summaryChartData = google.visualization.arrayToDataTable([
+
+          ['Physician Service', 'Anemia of Chronic Disease', 'Malignancy', 'Cardiovascular disease', 'Pre-op with expected blood loss' ],
+
+          {% for physicianService, tranfusionSummaryObj in tranfusionSummaryObjMap.items %}
+            ["{{ physicianService }}", {{ tranfusionSummaryObj.anemiaChronicDiseaseCount }} , {{ tranfusionSummaryObj.malignancyCount }}, {{ tranfusionSummaryObj.cardiovascularDisease }}, {{ tranfusionSummaryObj.preOpExpectedBloodLossCount }}],
+          {% endfor %}
+
+      ]);
+
+      var options = {
+        title: 'Summary by Indication and Physician Service',
+        vAxis: {title: 'Physician Service',  titleTextStyle: {color: 'red'}}
+      };
+
+      var summaryChart = new google.visualization.BarChart(document.getElementById('summary_div'));
+
+      summaryChart.draw(summaryChartData, options);
+
+      var dashboardData = google.visualization.arrayToDataTable([
+
+         ['Physician Service', 'Transfusion Count' ],
+
+         {% for physicianService, tranfusionSummaryObj in tranfusionSummaryObjMap.items %}
+            ["{{ physicianService }}", {{ tranfusionSummaryObj.transfusionCount }}],
+         {% endfor %}
+
+      ]);
+
+      var pieChartOptions = {
+        title: 'Tranfusion Count by Physician Service',
+        pieSliceText: 'label',
+        is3D: true,
+      };
+
+      var pieChart = new google.visualization.PieChart(document.getElementById('pieChart_div'));
+      pieChart.draw(dashboardData, pieChartOptions);
+
+     } <!-- end function -->
+
+     var d3Dataset = [
+        [
+                { x: 0, y: 5 },
+                { x: 1, y: 4 },
+                { x: 2, y: 2 },
+                { x: 3, y: 7 },
+                { x: 4, y: 23 }
+        ],
+        [
+                { x: 0, y: 10 },
+                { x: 1, y: 12 },
+                { x: 2, y: 19 },
+                { x: 3, y: 23 },
+                { x: 4, y: 17 }
+        ],
+        [
+                { x: 0, y: 22 },
+                { x: 1, y: 28 },
+                { x: 2, y: 32 },
+                { x: 3, y: 35 },
+                { x: 4, y: 43 }
+        ]
+      ];
+
+     var stack = d3.layout.stack();
+     stack(dataset);
+
+</script>
+
+{% endblock js %}
+{% block content %}
+<!-- /.row -->
+{% csrf_token %}
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Analysis Dashboard</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<form action="/hemcis/processMonitor/"  enctype="multipart/form-data" method = "post" id = "processMonitorForm" >
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Analysis of transfusion data</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<form action="/hemcis/seeDecisionTree/"  enctype="multipart/form-data" method = "post" id = "dashBoardForm" >
+<input type="hidden" value = "" name="treatmentHistoryId" id ="treatmentHistoryId"/>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Results of data analysis
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        <div class="panel-group" id="accordion">
+          <div class="panel panel-default" style="overflow: auto;">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#patientSummaryDataDiv"> Show / Hide Patient Summary Data</a>
+              </h4>
+            </div>
+            <div id="patientSummaryDataDiv" class="panel-collapse collapse in">
+	      <p><div id="summary_div" style="width: 900px; height: 500px;" ></div></p>
+	      <p>
+                 <!-- <div id="dashboard_div" > -->
+                 <!--   <div id="filter_div"></div> -->
+                 <div id="pieChart_div" style="width:600px;height:600px;margin-top:0px;padding-top:0px;"></div>
+                 <!-- </div> -->
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="panel-group" id="accordion">
+          <div class="panel panel-default" style="overflow: auto;">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#patientDataDiv"> Show / Hide Patient Data</a>
+              </h4>
+            </div>
+            <div id="patientDataDiv" class="panel-collapse collapse">
+	      <p style="font-weight:bold;">The dashboard lists patient data which has been retroactively analyzed. Unstructured patient notes have been searched for patterns related to indications and / or symptoms. The indications / symptoms of interest are displayed in parenthesis next to the notes which are listed in the table below.</p>
+	      <p><div id="table_div" ></div></p>
+            </div>
+          </div> 
+        </div>
+        <div class="panel-group" id="accordion">
+          <div class="panel panel-default" style="overflow: auto;">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#decisionTreeDiv"> Show / Hide Decision Tree</a>
+              </h4>
+            </div>
+            <div id="decisionTreeDiv" class="panel-collapse collapse">
+	      <p><div id="chart_div" ></div></p>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

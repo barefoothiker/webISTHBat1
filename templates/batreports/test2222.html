@@ -1,0 +1,759 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1265.21">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; color: #0000ee}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; min-height: 14.0px}
+    span.s1 {text-decoration: underline ; color: #0000ee}
+    span.s2 {color: #000000}
+    span.s3 {text-decoration: underline}
+    span.Apple-tab-span {white-space:pre}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;meta charset="utf-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;meta name="description" content=""&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;meta name="author" content=""&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;link rel="shortcut icon" href="<a href="view-source:http://localhost:8000/docs-assets/ico/favicon.png"><span class="s1">../../docs-assets/ico/favicon.png</span></a>"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;title&gt;ISTH-BAT Phenotype Recording Instrument&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Bootstrap core CSS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;link href="<a href="view-source:http://localhost:8000/static/css/bootstrap.css"><span class="s1">/static/css/bootstrap.css</span></a>" rel="stylesheet"&gt;</p>
+<p class="p2"><span class="s2"><span class="Apple-tab-span">	</span>&lt;link href="<a href="view-source:http://localhost:8000/static/css/jquery.dataTables.min.css"><span class="s3">/static/css/jquery.dataTables.min.css</span></a>" rel="stylesheet"&gt;<span class="Apple-tab-span">	</span></span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Custom styles for this template --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;link href="<a href="view-source:http://localhost:8000/static/css/justified-nav.css"><span class="s1">/static/css/justified-nav.css</span></a>" rel="stylesheet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;link href="<a href="view-source:http://localhost:8000/static/css/datepicker.css"><span class="s1">/static/css/datepicker.css</span></a>" rel="stylesheet"&gt; <span class="Apple-converted-space">       </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Bootstrap core JavaScript --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Placed at the end of the document so the pages load faster --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;script src="<a href="view-source:http://localhost:8000/static/js/jquery.min.js"><span class="s1">/static/js/jquery.min.js</span></a>"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;script src="<a href="view-source:http://localhost:8000/static/js/bootstrap.min.js"><span class="s1">/static/js/bootstrap.min.js</span></a>"&gt;&lt;/script&gt;</p>
+<p class="p2"><span class="s2"><span class="Apple-tab-span">	</span>&lt;script src="<a href="view-source:http://localhost:8000/static/js/jquery.dataTables.min.js"><span class="s3">/static/js/jquery.dataTables.min.js</span></a>"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="Apple-tab-span">	</span>&lt;script src="<a href="view-source:http://localhost:8000/static/js/highcharts.js"><span class="s1">/static/js/highcharts.js</span></a>"&gt;&lt;/script&gt;<span class="Apple-tab-span">	</span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;script src="<a href="view-source:http://localhost:8000/static/js/modules/heatmap.js"><span class="s1">/static/js/modules/heatmap.js</span></a>"&gt;&lt;/script&gt;</p>
+<p class="p2"><span class="s2"><span class="Apple-tab-span">	</span>&lt;script src="<a href="view-source:http://localhost:8000/static/js/modules/exporting.js"><span class="s3">/static/js/modules/exporting.js</span></a>"&gt;&lt;/script&gt;<span class="Apple-tab-span">	</span></span></p>
+<p class="p1"><span class="Apple-tab-span">	</span>&lt;!--&lt;script src="/static/js/googlejsapi.js"&gt;&lt;/script&gt;--&gt;</p>
+<p class="p2"><span class="s2"><span class="Apple-tab-span">	</span>&lt;script src="<a href="view-source:http://localhost:8000/static/js/jqBootstrapValidation.js"><span class="s3">/static/js/jqBootstrapValidation.js</span></a>"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="Apple-tab-span">	</span>&lt;script src="<a href="view-source:http://localhost:8000/static/js/datepicker.js"><span class="s1">/static/js/datepicker.js</span></a>"&gt;&lt;/script&gt;<span class="Apple-tab-span">	</span></p>
+<p class="p1"><span class="Apple-tab-span">	</span>&lt;!--&lt;script src="/static/js/Chart.js"&gt;&lt;/script&gt;--&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span></p>
+<p class="p3"><span class="Apple-converted-space">       </span></p>
+<p class="p3"><br></p>
+<p class="p1">&lt;script type="text/javascript"&gt;</p>
+<p class="p3"><br></p>
+<p class="p1"><span class="Apple-converted-space"> </span>function submitUPINLink(obj){<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>objId = obj.id;</p>
+<p class="p3"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>data = objId.split("-");</p>
+<p class="p3"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (data.length &gt; 0){</p>
+<p class="p3"><br></p>
+<p class="p1"><span class="Apple-converted-space">         </span>upinId = data[1];</p>
+<p class="p3"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>}<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>$("#upinId").val(upinId);</p>
+<p class="p3"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>$("#graphReportForm").submit();</p>
+<p class="p3"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p3"><br></p>
+<p class="p1"><span class="Apple-converted-space"> </span>function submitGraphForm(obj){<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>$("#graphReportForm").attr('action','/batreports/createOutputGraphReport/');<span class="Apple-converted-space">     </span></p>
+<p class="p3"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>$("#graphReportForm").submit();</p>
+<p class="p3"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p3"><span class="Apple-converted-space">  </span></p>
+<p class="p3"><span class="Apple-converted-space">          </span></p>
+<p class="p3"><span class="Apple-converted-space">       </span></p>
+<p class="p3"><br></p>
+<p class="p3"><span class="Apple-converted-space">         </span></p>
+<p class="p3"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>$(function () {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>$('#sectionChart-4-32').highcharts({</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>chart: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>type: 'bar'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>title: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>text: 'At what age did you first have symptoms?'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>xAxis: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>categories: [ 'Between 1-5 years of age' , 'Between 6-12 years of age' , 'Between 13-25 years of age' , 'After 25 years of age' , 'Before 1 year of age' ,]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>yAxis: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>title: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>text: 'Number of respondents'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>series: [</p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'Between 13-25 years of age' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [3]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'After 25 years of age' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [4]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-tab-span">	</span>});</p>
+<p class="p3"><span class="Apple-converted-space">         </span></p>
+<p class="p3"><span class="Apple-converted-space">       </span></p>
+<p class="p3"><br></p>
+<p class="p3"><span class="Apple-converted-space">         </span></p>
+<p class="p3"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>$(function () {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>$('#sectionChart-4-33').highcharts({</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>chart: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>type: 'bar'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>title: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>text: 'Approximate number of episodes NOT requiring medical attention.'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>xAxis: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>categories: [ '1 every week' , 'Less than 1 per year' , '1 per year' , '2-5 every year' , '1-3 every month' ,]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>yAxis: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>title: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>text: 'Number of respondents'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>series: [</p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'Less than 1 per year' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [1]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'1 per year' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [1]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'2-5 every year' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [2]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'1-3 every month' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [1]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-tab-span">	</span>});</p>
+<p class="p3"><span class="Apple-converted-space">         </span></p>
+<p class="p3"><span class="Apple-converted-space">       </span></p>
+<p class="p3"><br></p>
+<p class="p3"><span class="Apple-converted-space">         </span></p>
+<p class="p3"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>$(function () {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>$('#sectionChart-4-26').highcharts({</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>chart: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>type: 'bar'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>title: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>text: 'Have you ever had hematuria?'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>xAxis: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>categories: [ 'Yes' , 'No' ,]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>yAxis: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>title: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>text: 'Number of respondents'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>series: [</p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'Yes' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [10]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'No' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [11]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-tab-span">	</span>});</p>
+<p class="p3"><span class="Apple-converted-space">         </span></p>
+<p class="p3"><span class="Apple-converted-space">       </span></p>
+<p class="p3"><br></p>
+<p class="p3"><span class="Apple-converted-space">         </span></p>
+<p class="p3"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>$(function () {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>$('#sectionChart-4-27').highcharts({</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>chart: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>type: 'bar'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>title: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>text: 'Presence of associated urologic disease?</p>
+<p class="p1">'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>xAxis: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>categories: [ 'Yes' , 'No' ,]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>yAxis: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>title: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>text: 'Number of respondents'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>series: [</p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'Yes' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [5]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'No' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [5]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-tab-span">	</span>});</p>
+<p class="p3"><span class="Apple-converted-space">         </span></p>
+<p class="p3"><span class="Apple-converted-space">       </span></p>
+<p class="p3"><br></p>
+<p class="p3"><span class="Apple-converted-space">         </span></p>
+<p class="p3"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>$(function () {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>$('#sectionChart-4-28').highcharts({</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>chart: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>type: 'bar'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>title: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>text: 'Urologic disease. Please specify.'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>xAxis: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>categories: [ 'Stones' , 'Infection' , 'Kidney/ bladder disease' ,]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>yAxis: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>title: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>text: 'Number of respondents'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>series: [</p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'Stones' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [1]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'Infection' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [2]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'Kidney/ bladder disease' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [2]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-tab-span">	</span>});</p>
+<p class="p3"><span class="Apple-converted-space">         </span></p>
+<p class="p3"><span class="Apple-converted-space">       </span></p>
+<p class="p3"><br></p>
+<p class="p3"><span class="Apple-converted-space">         </span></p>
+<p class="p3"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>$(function () {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>$('#sectionChart-4-29').highcharts({</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>chart: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>type: 'bar'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>title: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>text: 'Have the symptoms ever required medical attention?'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>xAxis: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>categories: [ 'Yes' , 'No' ,]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>yAxis: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>title: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>text: 'Number of respondents'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>series: [</p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'Yes' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [7]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'No' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [3]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-tab-span">	</span>});</p>
+<p class="p3"><span class="Apple-converted-space">         </span></p>
+<p class="p3"><span class="Apple-converted-space">       </span></p>
+<p class="p3"><br></p>
+<p class="p3"><span class="Apple-converted-space">         </span></p>
+<p class="p3"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>$(function () {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>$('#sectionChart-4-30').highcharts({</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>chart: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>type: 'bar'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>title: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>text: 'Medial attention for hematuria. Please specify.'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>xAxis: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>categories: [ 'Consultation Only' , 'Treatment<span class="Apple-converted-space">  </span>with plasma' , 'Blood (RBC) transfusion' , 'Surgery' , 'Iron therapy' , 'Treatment with platelets' , 'Treatment with factor concentrates' , 'Treatment with desmopressin' ,]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>yAxis: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>title: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>text: 'Number of respondents'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>series: [</p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'Consultation Only' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [5]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'Iron therapy' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [2]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'Treatment with desmopressin' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [1]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-tab-span">	</span>});</p>
+<p class="p3"><span class="Apple-converted-space">         </span></p>
+<p class="p3"><span class="Apple-converted-space">       </span></p>
+<p class="p3"><br></p>
+<p class="p3"><span class="Apple-converted-space">         </span></p>
+<p class="p3"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>$(function () {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>$('#sectionChart-4-31').highcharts({</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>chart: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>type: 'bar'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>title: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>text: 'How many times in your life did you received any of the above treatments?'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>xAxis: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>categories: [ '1 - 2' , '3 - 5' , '6 - 10' , 'More than 10' ,]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>yAxis: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>title: {</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>text: 'Number of respondents'</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>},</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>series: [</p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>{</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>name:<span class="Apple-converted-space">  </span>'1 - 2' ,</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>data: [7]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>},<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> <span class="Apple-tab-span">	</span></span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>]</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-tab-span">	</span>});</p>
+<p class="p3"><span class="Apple-converted-space">         </span></p>
+<p class="p3"><span class="Apple-converted-space">       </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span></p>
+<p class="p3"><br></p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p3"><br></p>
+<p class="p3"><span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="masthead"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="col-xs-12" style="text-align:center;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;a href="<a href="view-source:http://localhost:8000/batreports/"><span class="s1">/batreports/</span></a>"&gt;&lt;img src="<a href="view-source:http://localhost:8000/static/img/rubhpsr_isth-batr_logo.jpg"><span class="s1">/static/img/rubhpsr_isth-batr_logo.jpg</span></a>" width="600"/&gt;&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="col-xs-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p style="text-align:center;font-weight:bold;font-size:24px;"&gt;ISTH-BATR Bleeding Questionnaire Reports&lt;p/&gt;&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p3"><br></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;nav class="navbar navbar-default"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>&lt;div class="container-fluid"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div class="navbar-header"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;a class="navbar-brand" href="<a href="view-source:https://bh.rockefeller.edu/bat/login"><span class="s1">https://bh.rockefeller.edu/bat/login</span></a>"&gt;ISTH-BATR Questionnaire&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;ul class="nav navbar-nav"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;li &gt;&lt;a href="<a href="view-source:http://localhost:8000/batreports/"><span class="s1">/batreports/</span></a>"&gt;Report Home&lt;/a&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;li &gt;&lt;a href="<a href="view-source:http://localhost:8000/batreports/listUPINs"><span class="s1">/batreports/listUPINs</span></a>"&gt;Individual Report&lt;/a&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;li &gt;&lt;a href="<a href="view-source:http://localhost:8000/batreports/selectParameters"><span class="s1">/batreports/selectParameters</span></a>"&gt;Aggregate Report&lt;/a&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;li class="active"&gt;&lt;a href="<a href="view-source:http://localhost:8000/batreports/graphReport"><span class="s1">/batreports/graphReport</span></a>"&gt;Graph Report&lt;/a&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;li &gt;&lt;a href="<a href="view-source:http://localhost:8000/batreports/displayInstrumentAdministratorList"><span class="s1">/batreports/displayInstrumentAdministratorList</span></a>"&gt;User Management&lt;/a&gt;&lt;/li&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>    </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;li &gt;&lt;a href="<a href="view-source:http://localhost:8000/batreports/summaryReport"><span class="s1">/batreports/summaryReport</span></a>"&gt;Summary Report&lt;/a&gt;&lt;/li&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;/ul&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;ul class="nav pull-right"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;li &gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">        </span>105</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;li &gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">        </span>&lt;a href="<a href="view-source:http://localhost:8000/accounts/logout"><span class="s1">/accounts/logout</span></a>"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></span>Logout</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;/ul&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;/div&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;/nav&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p3"><br></p>
+<p class="p1">&lt;!-- /.row --&gt;</p>
+<p class="p1">&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="col-lg-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1 class="page-header"&gt;Graph Report &lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- /.col-lg-12 --&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p1">&lt;!-- /.row --&gt;</p>
+<p class="p1">&lt;form method = "post" id = "graphReportForm" name = "graphReportForm" action="<a href="view-source:http://localhost:8000/batreports/scoreReport/"><span class="s1">/batreports/scoreReport/</span></a>" &gt;</p>
+<p class="p1"><span class="Apple-converted-space">   </span>&lt;input type="hidden" value="" name="upinId" id ="upinId"/&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p1"><span class="Apple-converted-space">   </span>&lt;input type="hidden" value="103" name="siteId" id ="siteId"/&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p1"><span class="Apple-converted-space">   </span>&lt;input type="hidden" value="10" name="studyId" id ="studyId"/&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p1"><span class="Apple-converted-space">   </span>&lt;input type="hidden" value="201" name="instrumentAdministratorId" id ="instrumentAdministratorId"/&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><br></p>
+<p class="p3"><br></p>
+<p class="p1"><span class="Apple-converted-space">   </span>&lt;input type="hidden" value="4" name="sectionId" id ="sectionId"/&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space"> </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="col-lg-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">   </span>&lt;p&gt;Below is the graph report for the section parameters. The data and graphs for each section can be viewed by toggling the panels below by clicking on the panel headers. The selection parameters are also shown below.&lt;br/&gt;The graphs are interactive. If you mouse over the bar or pie charts, the responses and the number of responses will be displayed in a popup.&lt;/p&gt; <span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space"> </span>&lt;div class="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="col-lg-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="panel panel-default"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="panel-heading"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;h4 class="panel-title"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;a data-toggle="collapse" data-parent="#panels1" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23selectionParametersPanel"><span class="s1">#selectionParametersPanel</span></a>"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>Selection Parameter Details. (Please click to toggle this panel.)</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;/h4&gt; <span class="Apple-converted-space">       </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;!-- /.panel-heading --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="panel-body" &gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span>&lt;div id="selectionParametersPanel" class="panel-collapse collapse" &gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;p class="text-center"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;h4&gt;Sites:&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;ul&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;li value="103"&gt;Queen&amp;#39;s University-Kingston Ontario&lt;/li&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   <span class="Apple-tab-span">	</span>    <span class="Apple-tab-span">	</span>    </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;p class="text-center"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;h4&gt;Studies:&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;ul&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;li value="10"&gt;Protocol&lt;/li&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   <span class="Apple-tab-span">	</span>    <span class="Apple-tab-span">	</span>    </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;/p&gt;<span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;p class="text-center"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;h4&gt;Instrument Administrator:&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;ul&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;li value="201"&gt;Grabell Julie&lt;/li&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   <span class="Apple-tab-span">	</span>    <span class="Apple-tab-span">	</span>    </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;p class="text-center"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;h4&gt;Sections:&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;ul&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;li value="4"&gt;Hematuria&lt;/li&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   <span class="Apple-tab-span">	</span>    <span class="Apple-tab-span">	</span>    </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;!-- /.panel-body --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- /.panel --&gt;</p>
+<p class="p3"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Example row of columns --&gt;<span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="panel panel-default"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="panel-heading"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span>&lt;h4 class="panel-title"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;a data-toggle="collapse" data-parent="#panels1" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23sectionsListPanel"><span class="s1">#sectionsListPanel</span></a>"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>List of sections &lt;/b&gt;&amp;nbsp;( Please click to toggle this panel. )</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span>&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div id="sectionsListPanel" class="panel-collapse collapse in"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p&gt;&amp;nbsp;&lt;/p&gt;</p>
+<p class="p3"><span class="Apple-converted-space">         </span></p>
+<p class="p3"><span class="Apple-converted-space">      </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="panel-group" id="accordion1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="panel panel-default"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;div class="panel-heading"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">        </span>&lt;h4 class="panel-title"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> <span class="Apple-tab-span">	</span>   </span>&lt;a data-toggle="collapse" data-parent="#accordion3" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23sectionsPanel-4"><span class="s1">#sectionsPanel-4</span></a>"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> <span class="Apple-tab-span">	</span>   </span>Hematuria &lt;/b&gt;&amp;nbsp;(<span class="Apple-converted-space">  </span>Please click to toggle this panel. )</p>
+<p class="p1"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> <span class="Apple-tab-span">	</span>   </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">        </span>&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;div id="sectionsPanel-4" class="panel-collapse collapse in"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>&lt;div class="panel-body"&gt;<span class="Apple-tab-span">	</span> <span class="Apple-converted-space">     </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;div class="panel-group" id="accordion2"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;div class="panel panel-default" style="overflow-x:auto;"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div class="panel-heading"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;h4 class="panel-title"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;a data-toggle="collapse" data-parent="#accordion2" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23sectionsDataPanel-4"><span class="s1">#sectionsDataPanel-4</span></a>"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>Data &amp;nbsp;(<span class="Apple-converted-space">  </span>Please click to toggle this panel. )</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div id="sectionsDataPanel-4" class="panel-collapse collapse"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;div class="panel-body"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>&lt;p&gt;&amp;nbsp;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>&lt;div class="table-responsive"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;table class="table table-striped table-bordered table-hover" &gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> &lt;thead&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">  </span>&lt;tr&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;th width="60%"&gt;Question&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;th width="30%"&gt;Answers&lt;/th&gt;<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">     </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;th width="10%"&gt;UPIN&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">  </span>&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> &lt;/thead&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> &lt;tbody&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;tr class="odd gradeX" &gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt;At what age did you first have symptoms?&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt; 'Between 1-5 years of age' &amp;nbsp;(0)&lt;br/&gt; 'Between 6-12 years of age' &amp;nbsp;(0)&lt;br/&gt; 'Between 13-25 years of age' &amp;nbsp;(3)&lt;br/&gt; 'After 25 years of age' &amp;nbsp;(4)&lt;br/&gt; 'Before 1 year of age' &amp;nbsp;(0)&lt;br/&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt;&lt;br/&gt;&lt;br/&gt;&lt;a id = "scoreReportLink-755321" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;755321&lt;/a&gt;,&lt;a id = "scoreReportLink-990756" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;990756&lt;/a&gt;,&lt;a id = "scoreReportLink-241187" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;241187&lt;/a&gt;,&lt;br/&gt;&lt;a id = "scoreReportLink-433619" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;433619&lt;/a&gt;,&lt;a id = "scoreReportLink-648581" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;648581&lt;/a&gt;,&lt;a id = "scoreReportLink-147956" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;147956&lt;/a&gt;,&lt;a id = "scoreReportLink-205270" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;205270&lt;/a&gt;,&lt;br/&gt;&lt;br/&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;/tr&gt; <span class="Apple-converted-space">               </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;tr class="even gradeC" &gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt;Approximate number of episodes NOT requiring medical attention.&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt; '1 every week' &amp;nbsp;(0)&lt;br/&gt; 'Less than 1 per year' &amp;nbsp;(1)&lt;br/&gt; '1 per year' &amp;nbsp;(1)&lt;br/&gt; '2-5 every year' &amp;nbsp;(2)&lt;br/&gt; '1-3 every month' &amp;nbsp;(1)&lt;br/&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt;&lt;br/&gt;&lt;a id = "scoreReportLink-657073" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;657073&lt;/a&gt;,&lt;br/&gt;&lt;a id = "scoreReportLink-874651" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;874651&lt;/a&gt;,&lt;br/&gt;&lt;a id = "scoreReportLink-356665" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;356665&lt;/a&gt;,&lt;a id = "scoreReportLink-241187" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;241187&lt;/a&gt;,&lt;br/&gt;&lt;a id = "scoreReportLink-433619" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;433619&lt;/a&gt;,&lt;br/&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;/tr&gt; <span class="Apple-converted-space">               </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;tr class="odd gradeX" &gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt;Have you ever had hematuria?&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt; 'Yes' &amp;nbsp;(10)&lt;br/&gt; 'No' &amp;nbsp;(11)&lt;br/&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt;&lt;a id = "scoreReportLink-433619" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;433619&lt;/a&gt;,&lt;a id = "scoreReportLink-648581" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;648581&lt;/a&gt;,&lt;a id = "scoreReportLink-874651" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;874651&lt;/a&gt;,&lt;a id = "scoreReportLink-755321" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;755321&lt;/a&gt;,&lt;a id = "scoreReportLink-356665" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;356665&lt;/a&gt;,&lt;a id = "scoreReportLink-990756" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;990756&lt;/a&gt;,&lt;a id = "scoreReportLink-147956" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;147956&lt;/a&gt;,&lt;a id = "scoreReportLink-241187" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;241187&lt;/a&gt;,&lt;a id = "scoreReportLink-657073" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;657073&lt;/a&gt;,&lt;a id = "scoreReportLink-205270" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;205270&lt;/a&gt;,&lt;br/&gt;&lt;a id = "scoreReportLink-154304" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;154304&lt;/a&gt;,&lt;a id = "scoreReportLink-705318" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;705318&lt;/a&gt;,&lt;a id = "scoreReportLink-493480" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;493480&lt;/a&gt;,&lt;a id = "scoreReportLink-582203" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;582203&lt;/a&gt;,&lt;a id = "scoreReportLink-959173" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;959173&lt;/a&gt;,&lt;a id = "scoreReportLink-276575" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;276575&lt;/a&gt;,&lt;a id = "scoreReportLink-743277" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;743277&lt;/a&gt;,&lt;a id = "scoreReportLink-881029" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;881029&lt;/a&gt;,&lt;a id = "scoreReportLink-107416" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;107416&lt;/a&gt;,&lt;a id = "scoreReportLink-534855" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;534855&lt;/a&gt;,&lt;a id = "scoreReportLink-292283" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;292283&lt;/a&gt;,&lt;br/&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;/tr&gt; <span class="Apple-converted-space">               </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;tr class="even gradeC" &gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt;Presence of associated urologic disease?</p>
+<p class="p1">&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt; 'Yes' &amp;nbsp;(5)&lt;br/&gt; 'No' &amp;nbsp;(5)&lt;br/&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt;&lt;a id = "scoreReportLink-648581" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;648581&lt;/a&gt;,&lt;a id = "scoreReportLink-755321" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;755321&lt;/a&gt;,&lt;a id = "scoreReportLink-990756" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;990756&lt;/a&gt;,&lt;a id = "scoreReportLink-147956" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;147956&lt;/a&gt;,&lt;a id = "scoreReportLink-205270" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;205270&lt;/a&gt;,&lt;br/&gt;&lt;a id = "scoreReportLink-433619" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;433619&lt;/a&gt;,&lt;a id = "scoreReportLink-874651" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;874651&lt;/a&gt;,&lt;a id = "scoreReportLink-356665" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;356665&lt;/a&gt;,&lt;a id = "scoreReportLink-241187" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;241187&lt;/a&gt;,&lt;a id = "scoreReportLink-657073" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;657073&lt;/a&gt;,&lt;br/&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;/tr&gt; <span class="Apple-converted-space">               </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;tr class="odd gradeX" &gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt;Urologic disease. Please specify.&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt; 'Stones' &amp;nbsp;(1)&lt;br/&gt; 'Infection' &amp;nbsp;(2)&lt;br/&gt; 'Kidney/ bladder disease' &amp;nbsp;(2)&lt;br/&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt;&lt;a id = "scoreReportLink-147956" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;147956&lt;/a&gt;,&lt;br/&gt;&lt;a id = "scoreReportLink-755321" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;755321&lt;/a&gt;,&lt;a id = "scoreReportLink-990756" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;990756&lt;/a&gt;,&lt;br/&gt;&lt;a id = "scoreReportLink-648581" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;648581&lt;/a&gt;,&lt;a id = "scoreReportLink-205270" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;205270&lt;/a&gt;,&lt;br/&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;/tr&gt; <span class="Apple-converted-space">               </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;tr class="even gradeC" &gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt;Have the symptoms ever required medical attention?&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt; 'Yes' &amp;nbsp;(7)&lt;br/&gt; 'No' &amp;nbsp;(3)&lt;br/&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt;&lt;a id = "scoreReportLink-433619" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;433619&lt;/a&gt;,&lt;a id = "scoreReportLink-648581" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;648581&lt;/a&gt;,&lt;a id = "scoreReportLink-755321" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;755321&lt;/a&gt;,&lt;a id = "scoreReportLink-990756" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;990756&lt;/a&gt;,&lt;a id = "scoreReportLink-147956" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;147956&lt;/a&gt;,&lt;a id = "scoreReportLink-241187" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;241187&lt;/a&gt;,&lt;a id = "scoreReportLink-205270" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;205270&lt;/a&gt;,&lt;br/&gt;&lt;a id = "scoreReportLink-874651" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;874651&lt;/a&gt;,&lt;a id = "scoreReportLink-356665" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;356665&lt;/a&gt;,&lt;a id = "scoreReportLink-657073" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;657073&lt;/a&gt;,&lt;br/&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;/tr&gt; <span class="Apple-converted-space">               </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;tr class="odd gradeX" &gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt;Medial attention for hematuria. Please specify.&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt; 'Consultation Only' &amp;nbsp;(5)&lt;br/&gt; 'Treatment<span class="Apple-converted-space">  </span>with plasma' &amp;nbsp;(0)&lt;br/&gt; 'Blood (RBC) transfusion' &amp;nbsp;(0)&lt;br/&gt; 'Surgery' &amp;nbsp;(0)&lt;br/&gt; 'Iron therapy' &amp;nbsp;(2)&lt;br/&gt; 'Treatment with platelets' &amp;nbsp;(0)&lt;br/&gt; 'Treatment with factor concentrates' &amp;nbsp;(0)&lt;br/&gt; 'Treatment with desmopressin' &amp;nbsp;(1)&lt;br/&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt;&lt;a id = "scoreReportLink-433619" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;433619&lt;/a&gt;,&lt;a id = "scoreReportLink-755321" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;755321&lt;/a&gt;,&lt;a id = "scoreReportLink-990756" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;990756&lt;/a&gt;,&lt;a id = "scoreReportLink-147956" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;147956&lt;/a&gt;,&lt;a id = "scoreReportLink-205270" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;205270&lt;/a&gt;,&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a id = "scoreReportLink-648581" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;648581&lt;/a&gt;,&lt;a id = "scoreReportLink-241187" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;241187&lt;/a&gt;,&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;a id = "scoreReportLink-241187" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;241187&lt;/a&gt;,&lt;br/&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;/tr&gt; <span class="Apple-converted-space">               </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;tr class="even gradeC" &gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt;How many times in your life did you received any of the above treatments?&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt; '1 - 2' &amp;nbsp;(7)&lt;br/&gt; '3 - 5' &amp;nbsp;(0)&lt;br/&gt; '6 - 10' &amp;nbsp;(0)&lt;br/&gt; 'More than 10' &amp;nbsp;(0)&lt;br/&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;td&gt;&lt;a id = "scoreReportLink-433619" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;433619&lt;/a&gt;,&lt;a id = "scoreReportLink-648581" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;648581&lt;/a&gt;,&lt;a id = "scoreReportLink-755321" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;755321&lt;/a&gt;,&lt;a id = "scoreReportLink-990756" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;990756&lt;/a&gt;,&lt;a id = "scoreReportLink-147956" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;147956&lt;/a&gt;,&lt;a id = "scoreReportLink-241187" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;241187&lt;/a&gt;,&lt;a id = "scoreReportLink-205270" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23"><span class="s1">#</span></a>" onclick ="javascript:submitUPINLink(this);"&gt;205270&lt;/a&gt;,&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;/tr&gt; <span class="Apple-converted-space">               </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> &lt;/tbody&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">      </span>&lt;/table&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;!-- end panel --&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;div class="panel panel-default" style="overflow-x:auto;"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div class="panel-heading"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;h4 class="panel-title"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>&lt;a data-toggle="collapse" data-parent="#accordion2" href="<a href="view-source:http://localhost:8000/batreports/outputGraphReport/%23sectionsGraphPanel-4"><span class="s1">#sectionsGraphPanel-4</span></a>"&gt; <span class="Apple-converted-space">           </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>Graph &amp;nbsp;(<span class="Apple-converted-space">  </span>Please click to toggle this panel. )</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div id="sectionsGraphPanel-4" class="panel-collapse collapse in"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;div class="panel-body"&gt;<span class="Apple-converted-space"> </span></p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div id="sectionChart-4-32" style="width: 650px; height: 400px;"&gt;&lt;/div&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div id="sectionChart-4-33" style="width: 650px; height: 400px;"&gt;&lt;/div&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div id="sectionChart-4-26" style="width: 650px; height: 400px;"&gt;&lt;/div&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div id="sectionChart-4-27" style="width: 650px; height: 400px;"&gt;&lt;/div&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div id="sectionChart-4-28" style="width: 650px; height: 400px;"&gt;&lt;/div&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div id="sectionChart-4-29" style="width: 650px; height: 400px;"&gt;&lt;/div&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div id="sectionChart-4-30" style="width: 650px; height: 400px;"&gt;&lt;/div&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;div id="sectionChart-4-31" style="width: 650px; height: 400px;"&gt;&lt;/div&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   <span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>  </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;!-- end panel --&gt;<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;!-- end panel group --&gt;<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">      </span>&lt;!-- end panel body --&gt;<span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span><span class="Apple-tab-span">	</span> <span class="Apple-converted-space">   </span></p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;<span class="Apple-converted-space">     </span></p>
+<p class="p1"><span class="Apple-converted-space">   </span>&lt;/div&gt; <span class="Apple-converted-space">     </span></p>
+<p class="p3"><span class="Apple-converted-space">    <span class="Apple-tab-span">	</span></span></p>
+<p class="p1"><span class="Apple-converted-space">   </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space"> </span>&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">     </span>&lt;div class="form-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="checkbox"&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span>&lt;label&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span><span class="Apple-converted-space">  </span>&lt;input type="checkbox" value="1" name="printSelectionParameters" id="printSelectionParameters" &gt;&lt;/input&gt;&lt;b&gt;Print selection parameters in download file.&lt;/b&gt;</p>
+<p class="p1"><span class="Apple-tab-span">	</span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p class="help-block"&gt;Default is not to print selection parameters.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt; <span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;p class="text-center"&gt;</p>
+<p class="p3"><br></p>
+<p class="p1"><span class="Apple-converted-space">   </span>&lt;button type="submit" class="btn btn-primary btn-lg" value = "0" name = "submitButton" id="submitButton" onclick ="javascript:submitGraphForm(this);"&gt;Cancel&lt;/button&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;</p>
+<p class="p1"><span class="Apple-converted-space">   </span>&lt;button type="submit" class="btn btn-danger btn-lg" value = "1" name="submitButton" id="submitButton" onclick ="javascript:submitGraphForm(this);"&gt;Download CSV Data&lt;/button&gt;</p>
+<p class="p3"><br></p>
+<p class="p1"><span class="Apple-converted-space"> </span>&lt;/p&gt;</p>
+<p class="p3"><br></p>
+<p class="p1"><span class="Apple-converted-space"> </span>&lt;!-- /.row --&gt;</p>
+<p class="p1">&lt;/form&gt;</p>
+<p class="p3"><span class="Apple-tab-span">	</span> <span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Site footer --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="footer"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;© The Rockefeller University 2015&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- /container --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>

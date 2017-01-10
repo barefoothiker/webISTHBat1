@@ -1,0 +1,295 @@
+{% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/default.css">
+<!-- <link rel="stylesheet" type="text/css" href="/static/css/nouislider.css"> -->
+<!-- div.demo { padding: 10px !important; }; -->
+{% endblock css%}
+{% block js %}
+<script>
+  $(document).ready(function() {
+    
+    $('#sitesDataTable').DataTable({
+      paging: false   
+    });
+    $('#sectionsDataTable').DataTable({
+       paging: false 
+      }
+      );
+    $('#studiesDataTable').DataTable({
+       paging: false 
+      }
+    );  
+    $('#usersDataTable').DataTable({
+       paging: false 
+      }
+    );   
+    $('#selectAllStudies').click ( function()    
+     {        
+       $("input[name='studyId']").prop('checked', $(this).is(':checked'));
+     }
+    );
+
+    $('#selectAllSections').click ( function()    
+     {        
+       $("input[name='sectionId']").prop('checked', $(this).is(':checked'));
+     }
+    );
+    
+    $('#selectAllUsers').click ( function()    
+     {        
+       $("input[name='instrumentAdministratorId']").prop('checked', $(this).is(':checked'));
+     }
+    );
+    $('#selectAllSites').click ( function()    
+     {        
+       $("input[name='siteId']").prop('checked', $(this).is(':checked'));
+     }
+    );    
+  });
+</script>
+
+{% endblock js %}
+
+{% block content %}
+
+<!-- /.row -->
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Graph Report</h1>
+    <p>Please select from the following selection criteria to view the graph report. Please note that increasing the number of selection parameters would increase the time it would take to create the report.</p> 
+    <p>Please select format of the graph.</p>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<form method = "post" id = "graphReportForm" name = "graphReportForm" action="/batreports/outputGraphReport/">
+ <div class="row">  
+  <!-- panel for sites -->  
+  <div class="col-lg-6">
+    <div class="form-group">
+      <div class="checkbox">
+	<label>
+	  <input type="checkbox" value="1" name="barOrPieChart" id="barOrPieChart" ></input><b>Use Pie Charts for display.</b>
+	</label>
+      </div>
+      <p class="help-block">Default display format is Bar Plot.</p>
+    </div>  
+  </div>
+</div>
+ <div class="row">  
+  <!-- panel for sites -->  
+  <div class="col-lg-6">
+    <div class="form-group">
+      <div class="checkbox">
+	<label>
+	  <input type="checkbox" value="1" name="displayDemographicsData" id="displayDemographicsData" ></input><b>Display demographics report.</b>
+	</label>
+      </div>
+      <p class="help-block">Display demographics data.</p>
+    </div>  
+  </div>
+</div>
+ <div class="row">  
+  <!-- panel for sites -->  
+  <div class="col-lg-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+      	  <h4 class="panel-title">
+	    <a data-toggle="collapse" data-parent="#panels1" href="#sitesListPanel">
+	      Select Sites. (Click to toggle this panel.)
+	    </a>
+	  </h4>  
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body" style="height:400px;overflow-y:auto;" -webkit-scrollbar>
+       <div id="sitesListPanel" class="panel-collapse collapse in" >      
+        <div class="table-responsive" >
+	  <p>Please select sites from the following list</p>
+	  <table id="sitesDataTable" name="sitesDataTable" class="display" cellspacing="0" width="100%">	  
+	   <thead>
+	      <tr >
+		<th>Select<input type="checkbox" value="" name="selectAllSites" id="selectAllSites" ></th>
+                <th>Site</th>
+              </tr>
+           </thead>
+           <tbody>
+           {% for site in sites %}
+             <tr>
+               <td>
+		  <div class="checkbox">
+		    <label>
+		      <input type="checkbox" value="{{site.id}}" name ="siteId" id ="siteId" >
+		    </label>
+		  </div>
+		  </td>
+               <td>{{site}}</td>
+             </tr>
+           {% endfor %}
+           </tbody>
+          </table>
+        </div>
+        <!-- /.table-responsive -->
+       </div>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+  </div>
+  <!-- /.col-lg-12 -->
+   
+  <!-- panel for studies -->  
+  <div class="col-lg-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+	  <h4 class="panel-title">
+	    <a data-toggle="collapse" data-parent="#panels1" href="#studiesListPanel">
+	      Select Studies. (Click to toggle this panel.)
+	    </a>
+	  </h4>      
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body" style="height:400px;overflow-y:auto;"  -webkit-scrollbar>
+       <div id="studiesListPanel" class="panel-collapse collapse in" >          
+	<div class="table-responsive" >
+	  <p>Please select studies from the following list</p>
+	  <table id="studiesDataTable" name="studiesDataTable" class="display" cellspacing="0" width="100%">	  
+	   <thead>
+	      <tr >
+		<th>Select<input type="checkbox" value="" name="selectAllStudies" id="selectAllStudies" ></th>
+		<th>Study</th>
+	      </tr>
+	   </thead>
+	   <tbody>
+	   {% for study in studies %}
+	     <tr>
+	       <td>
+		  <div class="checkbox">
+		    <label>
+		      <input type="checkbox" value="{{study.id}}" name ="studyId" id ="studyId" >
+		    </label>
+		  </div>
+		  </td>
+	       <td>{{study}}</td>
+	     </tr>
+	   {% endfor %}
+	   </tbody>
+	  </table>
+	</div>
+	<!-- /.table-responsive -->
+       </div> 	
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+  </div>
+  <!-- /.col-lg-12 -->
+  
+ </div>
+ <!-- /.row -->
+ 
+<!-- /.row -->
+ <div class="row">   
+  <!-- panel for users -->  
+  <div class="col-lg-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+	  <h4 class="panel-title">
+	    <a data-toggle="collapse" data-parent="#panels1" href="#usersListPanel">
+	      Select Users. (Click to toggle this panel.)
+	    </a>
+	  </h4>       
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body" style="height:400px;overflow-y:auto;"  -webkit-scrollbar>
+       <div id="usersListPanel" class="panel-collapse collapse in" >         
+	<div class="table-responsive" >
+	  <p>Please select users from the following list</p>
+	  <table id="usersDataTable" name="usersDataTable" class="display" cellspacing="0" width="100%">	  
+	   <thead>
+	      <tr >
+		<th>Select<input type="checkbox" value="" name="selectAllUsers" id="selectAllUsers" ></th>
+		<th>User</th>
+	      </tr>
+	   </thead>
+	   <tbody>
+	   {% for instrumentAdministrator in instrumentAdministratorList %}
+	     <tr>
+	       <td>
+		  <div class="checkbox">
+		    <label>
+		      <input type="checkbox" value="{{instrumentAdministrator.id}}" name ="instrumentAdministratorId" id ="instrumentAdministratorId" >
+		    </label>
+		  </div>
+		  </td>
+	       <td>{{instrumentAdministrator}}</td>
+	     </tr>
+	   {% endfor %}
+	   </tbody>
+	  </table>
+	</div>
+	<!-- /.table-responsive -->
+       </div>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+  </div>
+  <!-- /.col-lg-12 -->
+   
+  <!-- panel for sections -->  
+  <div class="col-lg-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+	  <h4 class="panel-title">
+	    <a data-toggle="collapse" data-parent="#panels1" href="#sectionsListPanel">
+	      Select Sections. (Click to toggle this panel.)
+	    </a>
+	  </h4>       
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body" style="height:400px;overflow-y:auto;"  -webkit-scrollbar>
+       <div id="sectionsListPanel" class="panel-collapse collapse in" >        
+	<div class="table-responsive" >
+	  <p>Please select sections from the following list</p>
+	  <table id="sectionsDataTable" name="sectionsDataTable" class="display" cellspacing="0" width="100%">	  
+	   <thead>
+	      <tr >
+		<th>Select<input type="checkbox" value="" name="selectAllSections" id="selectAllSections" ></th>
+		<th>Section</th>
+	      </tr>
+	   </thead>
+	   <tbody>
+	   {% for section in sections %}
+	     <tr>
+	       <td>
+		  <div class="checkbox">
+		    <label>
+		      <input type="checkbox" value="{{section.id}}" name ="sectionId" id ="sectionId" >
+		    </label>
+		  </div>
+		  </td>
+	       <td>{{section}}</td>
+	     </tr>
+	   {% endfor %}
+	   </tbody>
+	  </table>
+	</div>
+	<!-- /.table-responsive -->
+       </div>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+  </div>
+  <!-- /.col-lg-12 -->
+  
+ </div>
+ <!-- /.row --> 
+ 
+   <p class="text-center">
+   <button type="submit" class="btn btn-primary btn-lg" value = "0" name = "viewReportButton" id="viewReportButton" >Cancel</button>&nbsp;&nbsp;&nbsp;
+   <button type="submit" class="btn btn-danger btn-lg" value = "1" name = "viewReportButton" id="viewReportButton" >View Graph Report</button>
+ </p>
+ 
+</form>
+{% endblock content %}

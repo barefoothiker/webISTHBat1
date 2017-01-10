@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/default.css">
+{% endblock css%}
+{% block js %}
+
+<script type="text/javascript">
+ 
+ $(document).ready(function() {
+    
+    $('#sitesDataTable').DataTable({
+      paging: false   
+    });
+
+    $('#studiesDataTable').DataTable({
+       paging: false 
+      }
+    );  
+  
+    $('#selectAllStudies').click ( function()    
+     {        
+       $("input[name='studyId']").prop('checked', $(this).is(':checked'));
+     }
+    );
+    
+    $('#selectAllSites').click ( function()    
+     {        
+       $("input[name='siteId']").prop('checked', $(this).is(':checked'));
+     }
+    );    
+
+  });
+  
+  function processCancel(obj){
+  
+      $("#addInstrumentAdministratorForm").attr('action','/batreports/displayInstrumentAdministratorList/');          
+
+      $("#addInstrumentAdministratorForm").submit();
+  
+  }
+
+</script>
+
+{% endblock js %}
+
+{% block content %}
+
+<!-- /.row -->
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">Add User</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<form method = "post" id = "addInstrumentAdministratorlistForm" name = "addInstrumentAdministratorForm" action="/batreports/submitAddInstrumentAdministrator/">
+<input type="hidden" id = "email" name = "email" value = ""/>
+ <div class="row">  
+    <div class="col-lg-6"> 
+
+      <div class="form-group">
+	  <label>Name:</label>
+	  <input type="text" class="form-control" id = "instrumentAdministratorName" name = "instrumentAdministratorName" value = "" required/>
+	  <p class="help-block">User name.</p>
+      </div>    
+
+      <div class="form-group">
+	<div class="checkbox">
+	  <label>
+	    <input type="checkbox" value="1" name="signWaiverFlag" id="signWaiverFlag"></input><b>Sign Waiver.</b>
+	  </label>
+	</div>
+	<p class="help-block">Waiver needs to be signed in order to administer the instrument.</p>
+      </div>  
+
+      <div class="form-group">
+	    <label>Password:</label>
+	  <input type="password" class="form-control" id = "password" name = "password" value = "" required/>
+	  <p class="help-block">Password used for logging into the application.</p>
+      </div>      
+
+      <!--<div class="form-group">-->
+	    <!--<label>Email:</label>-->
+	  <!--<input type="text" class="form-control" id = "email" name = "email" value = "" required/>-->
+	  <!--<p class="help-block">User email.</p>-->
+      <!--</div> -->
+
+      <div class="form-group">
+	  <label>Select Role</label>
+	  <select class="form-control" name="roleId" id="roleId" required>
+	    <option value = "">-- Select role --</option>
+	      {% for role in roles %}
+		<option value = "{{ role.id }}" >{{role}}</option>
+	     {% endfor %}
+	  </select>
+      </div>         
+    </div>
+  </div>
+
+ <div class="row">  
+  <!-- panel for sites -->  
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+      	  <h4 class="panel-title">
+	    <a data-toggle="collapse" data-parent="#panels1" href="#sitesListPanel">
+	      Select Authorized Sites. (Click to toggle this panel.)
+	    </a>
+	  </h4>  
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+       <div id="sitesListPanel" class="panel-collapse collapse in" >      
+        <div class="table-responsive"  style="height:400px;overflow-y:auto;" -webkit-scrollbar>
+	  <p>Please select sites from the following list</p>
+	  <table id="sitesDataTable" name="sitesDataTable" class="display" cellspacing="0" width="100%">	  
+	   <thead>
+	      <tr >
+		<th>Select<input type="checkbox" value="" name="selectAllSites" id="selectAllSites" ></th>
+                <th>Site</th>
+              </tr>
+           </thead>
+           <tbody>
+           {% for site in sites %}
+             <tr>
+               <td>
+		  <div class="checkbox">
+		    <label>
+		      <input type="checkbox" value="{{site.id}}" name ="siteId" id ="siteId" >
+		    </label>
+		  </div>
+		  </td>
+               <td>{{site}}</td>
+             </tr>
+           {% endfor %}
+           </tbody>
+          </table>
+        </div>
+        <!-- /.table-responsive -->
+       </div>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+  </div>
+  <!-- /.col-lg-12 -->
+   
+  <!-- panel for studies -->  
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+	  <h4 class="panel-title">
+	    <a data-toggle="collapse" data-parent="#panels1" href="#studiesListPanel">
+	      Select Studies. (Click to toggle this panel.)
+	    </a>
+	  </h4>      
+      </div>
+      <!-- /.panel-heading -->
+      <div class="panel-body" style="height:400px;overflow-y:auto;"  -webkit-scrollbar>
+       <div id="studiesListPanel" class="panel-collapse collapse in" >          
+	<div class="table-responsive" >
+	  <p>Please select studies from the following list</p>
+	  <table id="studiesDataTable" name="studiesDataTable" class="display" cellspacing="0" width="100%">	  
+	   <thead>
+	      <tr >
+		<th>Select<input type="checkbox" value="" name="selectAllStudies" id="selectAllStudies" ></th>
+		<th>Study</th>
+	      </tr>
+	   </thead>
+	   <tbody>
+	   {% for study in studies %}
+	     <tr>
+	       <td>
+		  <div class="checkbox">
+		    <label>
+		      <input type="checkbox" value="{{study.id}}" name ="studyId" id ="studyId" >
+		    </label>
+		  </div>
+		  </td>
+	       <td>{{study}}</td>
+	     </tr>
+	   {% endfor %}
+	   </tbody>
+	  </table>
+	</div>
+	<!-- /.table-responsive -->
+       </div> 	
+      </div>
+      <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+  </div>
+  <!-- /.col-lg-12 -->
+  
+ </div>
+ <!-- /.row -->
+ <!-- /.row -->
+<div class="row">
+  <div class="col-lg-12">
+    <p class="text-center">
+      <button type="submit" class="btn btn-primary btn-lg" value = "0" name = "submitButton" id = "submitButton" onclick = "javascript:processCancel(this);">Cancel</button>&nbsp;&nbsp;&nbsp;
+      <button type="submit" class="btn btn-danger btn-lg" value = "1" name = "submitButton" id = "submitButton" >Submit</button>     
+    </p>
+  </div>
+  <!-- /.col-lg-12 -->
+ </div>
+ <!-- /.row -->
+</form>
+{% endblock content %}
